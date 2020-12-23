@@ -7,6 +7,7 @@ import Blog from '@/components/Blog'
 import Post from '@/components/Post'
 import Cart from '@/components/Cart'
 import Layout from '@/components/Layout'
+import Register from '@/components/Register'
 
 Vue.use(Router)
 
