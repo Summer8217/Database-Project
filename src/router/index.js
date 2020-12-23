@@ -45,6 +45,11 @@ export default new Router({
           path:'/cart',
           component:Cart,
           name:'Cart'
+        },
+        {
+          path:'/register',
+          component:Register,
+          name:'Register'
         }
       ]
 
