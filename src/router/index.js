@@ -8,7 +8,6 @@ import Post from '@/components/Post'
 import Cart from '@/components/Cart'
 import Layout from '@/components/Layout'
 import Register from '@/components/Register'
-
 Vue.use(Router)
 
 export default new Router({

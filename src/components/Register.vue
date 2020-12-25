@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-container>
-      <div class="row ">
-        <p style="font-weight-light">請輸入以下資訊註冊帳號： </p>
+      <div class="row">
+        <p style="fontSize:24px">請輸入以下資訊註冊帳號： </p>
       </div>
       <div class="row pl-9">
         <div class="col-md-12 col-sm-12 col-xs-12">
