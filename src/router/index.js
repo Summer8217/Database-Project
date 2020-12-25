@@ -8,6 +8,9 @@ import Post from '@/components/Post'
 import Cart from '@/components/Cart'
 import Layout from '@/components/Layout'
 import Register from '@/components/Register'
+import Login from '@/components/Login'
+import KeyinUser from '@/components/KeyinUser'
+import KeyinPswd from '@/components/KeyinPswd'
 Vue.use(Router)
 
 export default new Router({
@@ -50,6 +53,24 @@ export default new Router({
           path:'/register',
           component:Register,
           name:'Register'
+        },
+        {
+          path:'/login',
+          component:Login,
+          name:'Login',
+          redirect:{name:'KeyinUser'},
+          children:[
+            {
+              path:'keyinUser',
+              component:KeyinUser,
+              name:'KeyinUser'
+            },
+            {
+              path:'keyinPswd',
+              component:KeyinPswd,
+              name:'KeyinPswd'
+            }
+          ]
         }
       ]
 
