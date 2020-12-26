@@ -6,65 +6,117 @@
       </div>
       <div class="row pl-9">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">Name: </span>
-          <input v-model="registerName" placeholder="input here">
+          <span>Name: </span>
+          <v-text-field
+          label = "輸入你的名字"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerName"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">NickName: </span>
-          <input v-model="registerNickName" placeholder="input here">
+          <span>NickName: </span>
+          <v-text-field
+          label = "輸入你的暱稱"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerNickName"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">Address: </span>
-          <input v-model="registerAddress" placeholder="input here">
+          <span>Address: </span>
+          <v-text-field
+          label = "輸入你的地址"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerAddress"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">Phone: </span>
-          <input v-model="registerPhone" placeholder="input here">
+          <span>Phone Number: </span>
+          <v-text-field
+          label = "輸入你的電話號碼"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerPhoneNumber"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">Email: </span>
-          <input v-model="registerEmail" placeholder="input here">
+          <span>Email: </span>
+          <v-text-field
+          label = "輸入你的電子郵件信箱"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerName"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">Account: </span>
-          <input v-model="registerAccount" placeholder="input here">
+          <span>AccountID </span>
+          <v-text-field
+          label = "輸入你的帳號"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerID"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">Password: </span>
-          <input v-model="registerPassword" placeholder="input here">
+          <span>Password </span>
+          <v-text-field
+          label = "輸入你的密碼"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerPassword"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <span class="pr-3">Check Password: </span>
-          <input v-model="registerCheckPassword" placeholder="input here">
+          <span>CheckPassword </span>
+          <v-text-field
+          label = "確認密碼"
+          type = "text"
+          class = "font-weight-bold"
+          outlined
+          clearable
+          v-model="registerPasswordCheck"
+          :rules="checkPasswordRule"
+          ></v-text-field>
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <v-btn class="primary white--text" outlined tile dense> Register!</v-btn>
+          <v-btn class="primary white--text" outlined tile dense v-on:click="passwordCheck"> Register!</v-btn>
         </div>
       </div>
     </v-container>
   </div>
 </template>
+
 <script>
+  import axios from 'axios'
     export default {
-        data: () => ({
-            rating:4.5,
-            breadcrums: [
-                {
-                    text: 'Home',
-                    disabled: false,
-                    href: 'breadcrumbs_home',
-                },
-                {
-                    text: 'Clothing',
-                    disabled: false,
-                    href: 'breadcrumbs_clothing',
-                },
-                {
-                    text: 'T-Shirts',
-                    disabled: true,
-                    href: 'breadcrumbs_shirts',
-                },
-            ],
-        }),
+      name:"Register",
+    data() {
+      return {
+        textFieldError: true,
+        errorMessages: "密碼輸入不一致",
+        checkPasswordRule: [
+          (v) => !!v || "請確認密碼",
+          (v) => (this.registerPasswordCheck === this.registerPassword) || "密碼不一致",
+          (v) => this.textFieldError || this.errorMessages,
+        ],
+      };
+  },
+      
     }
 </script>
