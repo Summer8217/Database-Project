@@ -11,6 +11,9 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import KeyinUser from '@/components/KeyinUser'
 import KeyinPswd from '@/components/KeyinPswd'
+import Login_admin from '@/components/Login_admin'
+import KeyinUser_admin from '@/components/KeyinUser_admin'
+import KeyinPswd_admin from '@/components/KeyinPswd_admin'
 Vue.use(Router)
 
 export default new Router({
@@ -69,6 +72,24 @@ export default new Router({
               path:'keyinPswd',
               component:KeyinPswd,
               name:'KeyinPswd'
+            }
+          ]
+        },
+        {
+          path:'/login_admin',
+          component:Login_admin,
+          name:'Login_admin',
+          redirect:{name:'KeyinUser_admin'},
+          children:[
+            {
+              path:'keyinUser_admin',
+              component:KeyinUser_admin,
+              name:'KeyinUser_admin'
+            },
+            {
+              path:'keyinPswd_admin',
+              component:KeyinPswd_admin,
+              name:'KeyinPswd_admin'
             }
           ]
         }

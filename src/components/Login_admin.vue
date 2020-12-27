@@ -4,8 +4,8 @@
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-8" :loading="card.loading">
           <div class="pt-12 pb-12 pl-6 pr-6">
-            <v-btn  v-on='on' class="mb-2 ml-2" v-text="'移至管理者登入'" href="/login_admin"></v-btn>
-            <v-img height="60" contain :src="require('../assets/logo.png')"></v-img>
+            <v-btn  v-on='on' class="mb-2 ml-2" v-text="'移至使用者登入'" href="/login"></v-btn>
+            <v-img height="60" contain :src="require('../assets/logo.png')"></v-img>  
             <v-card-title
               v-text="card.cardTitle"
               class="font-weight-black justify-center"
@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Login_admin",
   props: ["accountId", "username"],
   data() {
     return {
@@ -106,19 +106,16 @@ export default {
         //this.card.loading = true;
         this.transitionName = "slide-right";
         switch (to.name) {
-          case "KeyinUser":
-            this.setCard("使用者登入", "使用您的用戶帳戶");
+          case "KeyinUser_admin":
+            this.setCard("管理者登入", "使用您的管理者帳戶");
             break;
-          case "KeyinPswd":
+          case "KeyinPswd_admin":
             if (this.user.accountId === "") {
-              this.$router.push({ name: "KeyinUser" });
+              this.$router.push({ name: "KeyinUser_admin" });
             }
             this.setCard("歡迎使用", "", true);
             this.user.password = "";
             this.transitionName = "slide-left";
-            break;
-          case "VerifyUser":
-            this.setCard("請驗證您的身分", this.user.accountId);
             break;
         }
       },
