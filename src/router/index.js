@@ -14,6 +14,10 @@ import KeyinPswd from '@/components/KeyinPswd'
 import Login_admin from '@/components/Login_admin'
 import KeyinUser_admin from '@/components/KeyinUser_admin'
 import KeyinPswd_admin from '@/components/KeyinPswd_admin'
+import Admin_home from '@/components/Admin_home'
+import Admin_user from '@/components/Admin_user'
+import Admin_merchandise from '@/components/Admin_merchandise'
+import Admin_order from '@/components/Admin_order'
 Vue.use(Router)
 
 export default new Router({
@@ -95,6 +99,29 @@ export default new Router({
         }
       ]
 
+    },
+    {
+      path:'/',
+      component:Admin_home,
+      name:'Admin_home',
+   //   redirect:{name:'Admin_merchandise'},
+      children:[
+        {
+          path:'admin_merchandise',
+          component:Admin_merchandise,
+          name:'Admin_merchandise'
+        },
+        {
+          path:'admin_user',
+          component:Admin_user,
+          name:'Admin_user'
+        },
+        {
+          path:'admin_order',
+          component:Admin_order,
+          name:'Admin_order'
+        }
+      ]
     }
   ],
     mode:'history'
