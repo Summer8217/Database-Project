@@ -103,20 +103,28 @@
 </template>
 
 <script>
-  import axios from 'axios'
+    import axios from 'axios'
     export default {
       name:"Register",
-    data() {
-      return {
-        textFieldError: true,
-        errorMessages: "密碼輸入不一致",
-        checkPasswordRule: [
-          (v) => !!v || "請確認密碼",
-          (v) => (this.registerPasswordCheck === this.registerPassword) || "密碼不一致",
-          (v) => this.textFieldError || this.errorMessages,
-        ],
-      };
-  },
-      
+      data() {
+        return {
+          textFieldError: true,
+          errorMessages: "密碼輸入不一致",
+          checkPasswordRule: [
+            (v) => !!v || "請確認密碼",
+            (v) => (this.registerPasswordCheck == this.registerPassword) || "密碼不一致",
+            (v) => this.textFieldError || this.errorMessages,
+          ],
+        };
+      },
+      methods: {
+        passwordCheck: function() {
+          if ((this.registerPassword == this.registerPasswordCheck)) {
+            alert('register success!');
+          }else{
+            alert('asdasd');
+          }
+        },
+      }
     }
 </script>

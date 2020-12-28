@@ -18,6 +18,7 @@ import Admin_home from '@/components/Admin_home'
 import Admin_user from '@/components/Admin_user'
 import Admin_merchandise from '@/components/Admin_merchandise'
 import Admin_order from '@/components/Admin_order'
+import Order from '@/components/Order'
 Vue.use(Router)
 
 export default new Router({
@@ -54,7 +55,12 @@ export default new Router({
         {
           path:'/cart',
           component:Cart,
-          name:'Cart'
+          name:'Cart'         
+        },
+        {
+          path:'/order',
+          component:Order,
+          name:'Order'         
         },
         {
           path:'/register',

@@ -1,8 +1,7 @@
 <template>
   <div>
     <v-container>
-
-      <p class="display-3 font-weight-light	text-center pa-4">SHOPPING CART</p>
+      <p class="display-3 font-weight-light	text-center pa-4">Order</p>
       <v-row>
         <v-col :cols="12" md="9" sm="12" >
           <v-simple-table>
@@ -33,17 +32,7 @@
                   </v-list-item-content>
                 </v-list-item></td>
                 <td>$40.00</td>
-                <td>
-                  <v-text-field
-                    class="pt-10"
-                    label="Outlined"
-                    style="width: 80px;"
-                    single-line
-                    outlined
-                    value="2"
-                    type="number"
-                  ></v-text-field>
-                </td>
+                <td>2</td>
                 <td>$80.00</td>
                 <td><a>X</a></td>
               </tr>
@@ -63,53 +52,46 @@
                   </v-list-item-content>
                 </v-list-item></td>
                 <td>$40.00</td>
-                <td>
-                  <v-text-field
-                    class="pt-10"
-                    label="Outlined"
-                    style="width: 80px;"
-                    single-line
-                    outlined
-                    value="2"
-                    type="number"
-                  ></v-text-field>
-                </td>
+                <td>2</td>
                 <td>$80.00</td>
                 <td><a>X</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <v-list-item
+                  key="1"
+                  @click=""
+                >
+                  <v-list-item-avatar>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                  </v-list-item-content>
+                </v-list-item></td>
+                <td></td>
+                <td></td>
+                <td>$160.00</td>
               </tr>
               </tbody>
             </template>
           </v-simple-table>
         </v-col>
-        <v-col :cols="12" md="3" sm="12" style="background-color: lightgray">
-          <p class="headline">Order Summary</p>
-          <p class="overline">Shipping and additional costs are calculated based on values you have entered.
-          </p>
-          <v-simple-table>
-            <template v-slot:default>
-              <tbody>
-              <tr>
-                <td>Order Subtotal</td>
-                <td class="text-right" style="width: 50px;">$160.00</td>
-              </tr>
-              <tr>
-                <td>Shipping Charges</td>
-                <td class="text-right" style="width: 50px;">$10.00</td>
-              </tr>
-              <tr>
-                <td>Tax</td>
-                <td class="text-right" style="width: 50px;">$5.00</td>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td class="text-right" style="width: 50px;"><b>$175.00</b></td>
-              </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
-          <div class="text-center">
-            <v-btn href = "/Order" class="primary white--text mt-5" outlined>PROCEED TO PAY</v-btn>
-          </div>
+        <v-col :cols="12" md="9" sm="12" >
+            <span>請選擇取貨方式: </span><br>
+            <input type="radio" id="toHome" name="shipmentType" value="宅配到府" v-model="shipmentType">
+            <label for="toHome">宅配到府</label>
+            <input type="radio" id="to7-11" name="shipmentType" value="7-11超商取貨" v-model="shipmentType">
+            <label for="to7-11">7-11超商取貨</label>
+            <input type="radio" id="toFamilyMart" name="shipmentType" value="全家超商取貨" v-model="shipmentType">
+            <label for="toFamilyMart">全家超商取貨</label>
+        </v-col>
+        <v-col :cols="12" md="9" sm="12" >
+            <span>請選擇付款方式: </span><br>
+            <input type="radio" id="criditCard" name="paymentType" value="信用卡付款" v-model="paymentType">
+            <label for="criditCard">信用卡付款</label>
+            <input type="radio" id="cash" name="paymentType" value="貨到付款" v-model="paymentType">
+            <label for="cash">貨到付款</label>
+            <input type="radio" id="ATM" name="paymentType" value="ATM轉帳" v-model="paymentType">
+            <label for="ATM">ATM轉帳</label>
         </v-col>
       </v-row>
     </v-container>
@@ -156,26 +138,12 @@
 </template>
 <script>
     export default {
-        data: () => ({
-            rating: 4.5,
-            breadcrums: [
-                {
-                    text: 'Home',
-                    disabled: false,
-                    href: 'breadcrumbs_home',
-                },
-                {
-                    text: 'Clothing',
-                    disabled: false,
-                    href: 'breadcrumbs_clothing',
-                },
-                {
-                    text: 'T-Shirts',
-                    disabled: true,
-                    href: 'breadcrumbs_shirts',
-                },
-            ],
-        })
+        data() {
+        return {
+          shipmentType:"宅配到府",
+          paymentType:"信用卡付款"
+        };
+      }
     }
 </script>
 
