@@ -120,9 +120,10 @@
   }
 </style>
 <script>
+import axios from 'axios'
     export default {
         data: () => ({
-            amount: 10,
+            amount: 100,
             show: [1, 12],
             page:1,
             range: [0, 100000],
@@ -151,5 +152,28 @@
             ],
             products:[]
         }),
+        created: function(){
+          this.length = 1
+        },
+        mounted: function(){
+          axios.get("https://api.mocki.io/v1/de1c2fcb")
+          .then(response => {
+            //console.log(response.data.products);
+            //console.log(this.products)
+            this.products = response.data.products;
+            this.length = parseInt(response.data.amount / 12) + 1
+            this.amount = response.data.amount;
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        },
+
+        watch: {
+          page: function(){
+            console.log(this.page)
+          }
+        }
+        
     }
 </script>
