@@ -55,29 +55,9 @@
         <a href="/" class="v-btn">
           <span>Home</span>
         </a>
-        <v-menu open-on-hover offset-y>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on">
-              <span>Shop</span>
-            </v-btn>
-          </template>
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            outlined
-          >
-
-            <v-list-item
-              v-for="(item, index) in items"
-              :key="index"
-              @click=""
-              href="z/shop"
-            >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-
-          </v-card>
-        </v-menu>
+        <a href="/shop" class="v-btn">
+          <span>Shop</span>
+        </a>
         <a href="/product" class="v-btn">
           <span>Product</span>
         </a>
@@ -141,13 +121,6 @@
     export default {
         data () {
             return {
-                items: [
-                    { title: 'T-Shirts' },
-                    { title: 'Jackets' },
-                    { title: 'Shirts' },
-                    { title: 'Jeans' },
-                    { title: 'Shoes' },
-                ],
                 activeBtn: 1,
             }
         },
