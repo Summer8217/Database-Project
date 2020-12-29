@@ -59,10 +59,83 @@
               </tbody>
             </template>
           </v-simple-table>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <v-btn class="primary white--text" outlined tile dense v-on:click="passwordCheck">送出</v-btn>
+          </div>
+          <v-simple-table class="mb-3">
+            <template v-slot:default>
+              <tbody>
+              <tr>
+                <td>
+                    <v-img 
+                      class="align-end"
+                      height="150px"
+                      width="150px"
+                      :src="require('../assets/img/home/deal1.jpg')"
+                    ></v-img>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    超讚吸塵器
+                  </p>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    真的很讚
+                  </p>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    NT3,000
+                  </p>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    2020
+                  </p>
+                </td>
+              </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+          <v-simple-table class="mb-3">
+            <template v-slot:default>
+              <tbody>
+              <tr>
+                <td>
+                    <v-img 
+                      class="align-end"
+                      height="150px"
+                      width="150px"
+                      :src="require('../assets/img/home/deal3.jpg')"
+                    ></v-img>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    猛的吹風機
+                  </p>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    也是很讚
+                  </p>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    NT1,700
+                  </p>
+                </td>
+                <td>
+                  <p class="pt-10 subtitle-1">
+                    2021
+                  </p>
+                </td>
+              </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <v-btn class="primary white--text" outlined tile dense v-on:click="passwordCheck">送出</v-btn>
-        </div>
+        
       </div>
     </v-container>
   </div>

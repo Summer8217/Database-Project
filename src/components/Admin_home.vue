@@ -28,8 +28,8 @@
           <span>訂單管理</span>
         </v-btn>
       </v-bottom-navigation>
-    </v-content>
       <router-view/>
+    </v-content>
   </v-app>
 </template>
 
