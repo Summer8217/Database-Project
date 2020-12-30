@@ -64,7 +64,7 @@
           <v-divider></v-divider>
 
           <div class="row text-center">
-            <div class="col-md-3 col-sm-6 col-xs-12" :key="pro.id" v-for="pro in products">
+            <div class="col-md-3 col-sm-6 col-xs-12" :key="pro.id" v-for="pro in products.slice((page-1)*12, ((page-1)*12)+12)">
               <v-hover v-slot:default="{ hover }">
                 <v-card
                   class="mx-auto"
