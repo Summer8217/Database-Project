@@ -84,7 +84,7 @@
                         class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
                         style="height: 100%;"
                       >
-                        <v-btn v-if="hover" :href="'product/'+pro.id" class="" outlined>VIEW</v-btn>
+                        <v-btn v-if="hover" :href="'/product/'+pro.id" class="" outlined>VIEW</v-btn>
                       </div>
 
                     </v-expand-transition>
@@ -157,10 +157,11 @@ import axios from 'axios'
           this.length = 1
         },
         mounted: function(){
-          axios.get("/api/get-all")
+          axios.get('/api/search/' + this.$route.params.keyword)
           .then(response => {
             console.log(response.data.products);
             //console.log(this.products);
+            document.title= this.$route.params.keyword + ' - Search Result';
             this.products = response.data.products;
             this.length = parseInt(response.data.amount / 12) + 1
             this.amount = response.data.amount;

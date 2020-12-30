@@ -18,7 +18,7 @@
             <v-card-actions class="pa-0">
               <p class="headline font-weight-light pt-3">${{price}}</p>
             </v-card-actions>
-            <p class="subtitle-1 font-weight-thin">
+            <p class="subtitle-1">
               {{desc}}
             </p>
             <p class="title">ITEMS</p>
@@ -41,7 +41,7 @@
             <v-tab >Description</v-tab>
             <v-tab >Materials</v-tab>
             <v-tab-item>
-              <p class="pt-10 subtitle-1 font-weight-thin">
+              <p class="pt-10 subtitle-1">
                 {{desc}}
               </p>
             </v-tab-item>
@@ -339,6 +339,7 @@ import axios from 'axios'
           .then(response =>{
             console.log(response.data);
             this.name = response.data.name;
+            document.title='Byson - ' + this.name;
             this.breadcrums[2].text = response.data.merchandise_type;
             this.image = response.data.image;
             this.desc = response.data.detail_info;
