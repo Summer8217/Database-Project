@@ -84,7 +84,7 @@
                         class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
                         style="height: 100%;"
                       >
-                        <v-btn v-if="hover" :href="'product'" class="" outlined>VIEW</v-btn>
+                        <v-btn v-if="hover" :href="'product/'+pro.id" class="" outlined>VIEW</v-btn>
                       </div>
 
                     </v-expand-transition>
