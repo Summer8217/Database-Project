@@ -58,9 +58,6 @@
         <a href="/shop" class="v-btn">
           <span>Shop</span>
         </a>
-        <a href="/product" class="v-btn">
-          <span>Product</span>
-        </a>
         <v-btn href="/blog">
           <span>About</span>
         </v-btn>

@@ -42,6 +42,7 @@
               block
               elevation="2"
               color="primary"
+              @click="test()"
             >Apply</v-btn>
             
           </v-card>
@@ -75,7 +76,7 @@
                     class="white--text align-end"
                     :aspect-ratio="16/9"
                     height="200px"
-                    :src="pro.src"
+                    :src="`/static/img/shop/${pro.src}`"
                   >
                     <v-card-title>{{pro.type}} </v-card-title>
                     <v-expand-transition>
@@ -84,7 +85,7 @@
                         class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
                         style="height: 100%;"
                       >
-                        <v-btn v-if="hover" :href="pro.href" class="" outlined>VIEW</v-btn>
+                        <v-btn v-if="hover" @click="toProduct(pro.id)" class="" outlined>VIEW</v-btn>
                       </div>
 
                     </v-expand-transition>
@@ -152,23 +153,37 @@ import axios from 'axios'
             ],
             products:[]
         }),
-        created: function(){
-          this.length = 1
-        },
         mounted: function(){
-          axios.get("https://api.mocki.io/v1/de1c2fcb")
+          axios.get("https://api.mocki.io/v1/93c80dfe")
           .then(response => {
             //console.log(response.data.products);
             //console.log(this.products)
             this.products = response.data.products;
-            this.length = parseInt(response.data.amount / 12) + 1
+            this.length = parseInt(response.data.amount / 12)
+            if (response.data.amount % 12 != 0) this.length++
             this.amount = response.data.amount;
           })
           .catch(error => {
             console.log(error)
           })
         },
-
+        methods: {
+          toProduct (productID){
+            this.$router.push({ path: '/product', query: { id: productID }});
+          },
+          test (){
+            axios.get("https://api.mocki.io/v1/1ebc4623")
+            .then(response => {
+              this.products = response.data.products;
+              this.length = parseInt(response.data.amount / 12)
+              if (response.data.amount % 12 != 0) this.length++
+              this.amount = response.data.amount;
+            })
+            .catch(error => {
+              console.log(error)
+            })
+          }
+        },
         watch: {
           page: function(){
             console.log(this.page)
