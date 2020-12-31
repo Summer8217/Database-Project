@@ -109,17 +109,6 @@ export default {
           case "KeyinUser":
             this.setCard("使用者登入", "使用您的用戶帳戶");
             break;
-          case "KeyinPswd":
-            if (this.user.accountId === "") {
-              this.$router.push({ name: "KeyinUser" });
-            }
-            this.setCard("歡迎使用", "", true);
-            this.user.password = "";
-            this.transitionName = "slide-left";
-            break;
-          case "VerifyUser":
-            this.setCard("請驗證您的身分", this.user.accountId);
-            break;
         }
       },
       immediate: true,

@@ -10,7 +10,6 @@ import Layout from '@/components/Layout'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import KeyinUser from '@/components/KeyinUser'
-import KeyinPswd from '@/components/KeyinPswd'
 import Login_admin from '@/components/Login_admin'
 import KeyinUser_admin from '@/components/KeyinUser_admin'
 import KeyinPswd_admin from '@/components/KeyinPswd_admin'
@@ -78,11 +77,6 @@ export default new Router({
               component:KeyinUser,
               name:'KeyinUser'
             },
-            {
-              path:'keyinPswd',
-              component:KeyinPswd,
-              name:'KeyinPswd'
-            }
           ]
         },
         {

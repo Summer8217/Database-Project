@@ -13,12 +13,26 @@
         @keyup="setTextFieldError(true, '')"
         @keyup.enter.prevent="verifyUser"
       ></v-text-field>
+      <v-text-field
+        label="輸入您的密碼"
+        :type="showpswd ? 'text' : 'password'"
+        class="font-weight-bold"
+        outlined
+        clearable
+        :rules="passwordRules"
+        :counter="passwordLength"
+        v-model="myPassword"
+        :append-icon="showpswd ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="showpswd = !showpswd"
+        @keyup="setTextFieldError(true, '')"
+        @keyup.enter.prevent="verifyUser"
+      ></v-text-field>
       <!--v-text-field
         ref="eleAccountId"
       ></v-text-field-->
     </v-card-text>
     <v-card-actions>
-      <v-spacer><v-btn  href="/register" class="mr-2" v-text="'沒有帳戶，註冊?'"></v-btn></v-spacer>
+      <v-spacer><v-btn  class="mr-2" v-text="'沒有帳戶，註冊?'"></v-btn></v-spacer>
       <v-btn color="primary" class="mr-2" v-text="'繼續'" v-on:click="verifyUser">
       </v-btn>
     </v-card-actions>
@@ -26,63 +40,67 @@
 </template>
 
 <script>
+import axios from 'axios' 
 export default {
   name: "KeyinUser",
-  props: ["accountId"],
+  props: ["accountId", "password"],
   data() {
     return {
       textFieldError: true,
       errorMessages: "",
-      usernameLength: 10,
+      //usernameLength: 10,
       usernameRules: [
         (v) => !!v || "請輸入帳號",
-        (v) => (v && v.length <= this.usernameLength) || "最多10碼",
+        //(v) => (v && v.length <= this.usernameLength) || "最多10碼",
+        (v) => this.textFieldError || this.errorMessages,
+      ],
+      showpswd: false,
+      passwordRules: [
+        (v) => !!v || "請輸入密碼",
         (v) => this.textFieldError || this.errorMessages,
       ],
       fakedata:{
         accountId: "asd123", //假帳
         username: "Nick Good",
+        password: "123456",
       },
     };
   },
   methods: {
-    verifyUser: function() {
-      if (this.$refs.form.validate()) {
-        if (this.myAccountId == this.fakedata.accountId) {
-          this.$emit("update:username", this.fakedata.username);
-          this.$router.push({ name: "KeyinPswd" }); //如果帳號成功，要做的事
-          //alert('submit!');
+    verifyUser: function(){
+       var bodyFormData = new FormData();
+      bodyFormData.append('email', this.myAccountId);
+      bodyFormData.append('password', this.myPassword);
+      var config = {
+        method: 'post',
+        url: 'http://localhost:3000/login',
+        data: bodyFormData,
+        headers: {'Content-Type': 'multipart/form-data' }
+      };
+      axios(config)
+      .then((response) => {
+        if (response.data.message=="successful") {
+          //this.$emit("update:name", response.data.name);
+          this.$router.push({ name: "Home" });
+          alert("Success")
         } else {
-          this.setTextFieldError(false, "帳號錯誤"); //如果帳號失敗，要做的事
-          alert('Not submit!');
+          this.setTextFieldError(false, response.data.message);
+          this.$refs.form.validate();
+          alert("Not Success")
         }
-      }
+      })
+      .catch((error) => {
+        this.setTextFieldError(false, error);
+        this.$refs.form.validate();
+      });
+      
     },
-        /*const api = `${process.env.VUE_APP_APIPATH}/users/accountid/${this.myAccountId}`;
-        this.$http({
-          method: "GET",
-          url: api,
-        })
-          .then((response) => {
-            if (response.data.success) {
-              this.$emit("update:username", response.data.username);
-              this.$router.replace({ name: "KeyinPswd" });
-            } else {
-              this.setTextFieldError(false, response.data.message);
-              this.$refs.form.validate();
-            }
-          })
-          .catch((error) => {
-            this.setTextFieldError(false, error);
-            this.$refs.form.validate();
-          });
-      }
-    },*/
     setTextFieldError(textFieldError, errorMessages) {
       this.textFieldError = textFieldError;
       this.errorMessages = errorMessages;
     },
   },
+
   computed: {
     myAccountId: {
       get() {
@@ -90,6 +108,14 @@ export default {
       },
       set(value) {
         this.$emit("update:accountId", value);
+      },
+    },
+    myPassword: {
+      get() {
+        return this.password;
+      },
+      set(value) {
+        this.$emit("update:password", value);
       },
     },
   },
