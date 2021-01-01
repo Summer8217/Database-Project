@@ -19,6 +19,7 @@ import Admin_user from '@/components/Admin_user'
 import Admin_merchandise from '@/components/Admin_merchandise'
 import Admin_order from '@/components/Admin_order'
 import Order from '@/components/Order'
+import SearchResult from '@/components/SearchResult'
 Vue.use(Router)
 
 export default new Router({
@@ -102,6 +103,12 @@ export default new Router({
               name:'KeyinPswd_admin'
             }
           ]
+        },
+        {
+          path:'/search',
+          component:SearchResult,
+          props:true,
+          name:'SearchResult',
         }
       ]
 

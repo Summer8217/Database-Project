@@ -21,7 +21,7 @@
         prepend-inner-icon="mdi-magnify"
         label="Search"
         class="hidden-sm-and-down pl-10 ml-4"
-        @keydown.enter="search(keyword)"  
+        @keydown.enter="search(keyword)"
       />
       <v-spacer />
       <v-btn v-on="on" href="/login" icon>
@@ -126,10 +126,9 @@
         methods: {
           search(keyword) {
             console.log('search:' + keyword);
-            this.$router.push({path:`/search/${keyword}`});
-            this.$router.go({path:`/search/${keyword}`});
+            this.$router.push({path:'/search', query:{keyword:keyword}});
           }
-        }
+        },
     }
 </script>
 

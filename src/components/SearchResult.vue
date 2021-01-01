@@ -124,6 +124,7 @@
 import axios from 'axios'
     export default {
         data: () => ({
+            kw:'',
             amount: 100,
             show: [1, 12],
             page:1,
@@ -156,12 +157,14 @@ import axios from 'axios'
         created: function(){
           this.length = 1
         },
+        methods: {
+        },
         mounted: function(){
-          axios.get('/api/search/' + this.$route.params.keyword)
+          axios.get('/api/search/' + this.$route.query.keyword)
           .then(response => {
             console.log(response.data.products);
             //console.log(this.products);
-            document.title= this.$route.params.keyword + ' - Search Result';
+            document.title= this.$route.query.keyword + ' - Search Result';
             this.products = response.data.products;
             this.length = parseInt(response.data.amount / 12) + 1
             this.amount = response.data.amount;
@@ -170,12 +173,13 @@ import axios from 'axios'
             console.log(error)
           })
         },
-
+        
         watch: {
-          page: function(){
-            console.log(this.page)
+          '$route' (to, from){
+            this.$router.go(0);
           }
         }
+        
         
     }
 </script>
