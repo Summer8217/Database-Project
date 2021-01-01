@@ -176,7 +176,18 @@ import axios from 'axios'
         
         watch: {
           '$route' (to, from){
-            this.$router.go(0);
+            axios.get('/api/search/' + this.$route.query.keyword)
+            .then(response => {
+            console.log(response.data.products);
+            //console.log(this.products);
+            document.title= this.$route.query.keyword + ' - Search Result';
+            this.products = response.data.products;
+            this.length = parseInt(response.data.amount / 12) + 1
+            this.amount = response.data.amount;
+            })
+            .catch(error => {
+             console.log(error)
+            })
           }
         }
         
