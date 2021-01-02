@@ -24,7 +24,7 @@
         @keydown.enter="search(keyword)"
       />
       <v-spacer />
-      <v-btn v-on="on" href="/login" icon>
+      <v-btn v-on="on" icon @click="login">
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
       <v-btn v-on="on" icon>
@@ -127,6 +127,9 @@
           search(keyword) {
             console.log('search:' + keyword);
             this.$router.push({path:'/search', query:{keyword:keyword}});
+          },
+          login(){
+            this.$router.push({name:'Login'});
           }
         },
     }
