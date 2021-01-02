@@ -156,7 +156,29 @@
             this.errors.push('Phone Number required');
           }
           if(this.errors.length == 0){
-            alert("submit")
+            var postForm = new FormData();
+            postForm.append("MemberName",this.registerName);
+            postForm.append("MemberNickName",this.registerNickName);
+            postForm.append("MemberAddress",this.registerAddress);
+            postForm.append("MemberPhone",this.registerPhoneNumber);
+            postForm.append("MemberEmail",this.registerEmail);
+            postForm.append("MemberPassword",this.registerPassword);
+            alert('sadsa');
+            var config = {
+              method:'post',
+              url:'http://localhost:3000/register',
+              data:postForm,
+              headers:{'Content-Type': 'multipart/form-data'}
+            };
+            axios(config)
+              .then(function (response) {
+                  //handle success
+                  alert('sadsa');
+              })
+              .catch(function (response) {
+                  //handle error
+                  alert('aaaa');
+              })
           }else{
             alert(JSON.stringify(this.errors));
           }
