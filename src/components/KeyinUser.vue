@@ -32,7 +32,7 @@
       ></v-text-field-->
     </v-card-text>
     <v-card-actions>
-      <v-spacer><v-btn  class="mr-2" v-text="'沒有帳戶，註冊?'"></v-btn></v-spacer>
+      <v-spacer><v-btn  class="mr-2" v-text="'沒有帳戶，註冊?'" href="/register"></v-btn></v-spacer>
       <v-btn color="primary" class="mr-2" v-text="'繼續'" v-on:click="verifyUser">
       </v-btn>
     </v-card-actions>
