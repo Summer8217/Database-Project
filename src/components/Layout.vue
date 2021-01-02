@@ -22,8 +22,8 @@
         class="hidden-sm-and-down pl-10 ml-4"
       />
       <v-spacer />
-      <v-btn v-on="on" href="/login" icon>
-        <v-icon>mdi-account-circle</v-icon>
+      <v-btn v-on:click="judge" icon>
+        {{isLogin}}
       </v-btn>
       <v-btn v-on="on" icon>
         <v-badge
@@ -119,7 +119,30 @@
         data () {
             return {
                 activeBtn: 1,
+                isLogin: ""
             }
+        },
+        methods:{
+          judge: function(){
+            if(localStorage.getItem("accessToken") != null){
+              alert("已登出");
+              this.$router.push({ name: "Home" });
+              this.isLogin = "登入"
+              localStorage.removeItem("accessToken");
+            }
+            else{
+              this.$router.push({ name: "Login" });
+              this.isLogin = "登出"
+            }  
+          },
+        },
+        created() {
+          if(localStorage.getItem("accessToken") != null){
+              this.isLogin = "登出";
+          }
+          else{
+            this.isLogin = "登入";
+          }
         },
     }
 </script>

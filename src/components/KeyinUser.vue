@@ -43,7 +43,7 @@
 import axios from 'axios' 
 export default {
   name: "KeyinUser",
-  props: ["accountId", "password"],
+  props: ["accountId", "password","isLogin"],
   data() {
     return {
       textFieldError: true,
@@ -81,7 +81,8 @@ export default {
       .then((response) => {
         if (response.data.message=="successful") {
           //this.$emit("update:name", response.data.name);
-          this.$router.push({ name: "Home" });
+          localStorage.setItem("accessToken",response.data.token);
+          this.$router.push({ name: "Home"});
           alert("Success")
         } else {
           this.setTextFieldError(false, response.data.message);
