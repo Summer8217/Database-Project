@@ -38,11 +38,6 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-            <v-btn
-              block
-              elevation="2"
-              color="primary"
-            >Apply</v-btn>
             
           </v-card>
         </div>
@@ -64,7 +59,7 @@
           <v-divider></v-divider>
 
           <div class="row text-center">
-            <div class="col-md-3 col-sm-6 col-xs-12" :key="pro.id" v-for="pro in products.slice((page-1)*12, (page*12))">
+            <div class="col-md-3 col-sm-6 col-xs-12" :key="pro.id" v-for="pro in filterProduct">
               <v-hover v-slot:default="{ hover }">
                 <v-card
                   class="mx-auto"
@@ -159,11 +154,10 @@ import axios from 'axios'
         mounted: function(){
           axios.get("/api/get-all")
           .then(response => {
-            console.log(response.data.products);
-            //console.log(this.products);
             this.products = response.data.products;
-            this.length = parseInt(response.data.amount / 12) + 1
-            this.amount = response.data.amount;
+            this.length = parseInt(response.data.amount / 12)
+            if (response.data.amount % 12 != 0) this.length++
+            this.amount = response.data.products.length;
           })
           .catch(error => {
             console.log(error)
@@ -173,8 +167,30 @@ import axios from 'axios'
         watch: {
           page: function(){
             console.log(this.page)
+          },
+          range: function(){
+            this.page = 1
+          }
+        },
+        
+        computed: {
+          filterProduct: function(){
+            let low = this.range[0]
+            let high = this.range[1]
+
+            var newProducts = this.products.filter(function(product){
+              return product.price >= low && product.price <= high
+            })
+
+            this.amount = newProducts.length
+            this.length = parseInt(this.amount  / 12)
+            if (this.amount % 12 != 0) this.length++
+
+            return newProducts.slice((this.page-1)*12, ((this.page-1)*12)+12)
           }
         }
+        
+        
         
     }
 </script>
