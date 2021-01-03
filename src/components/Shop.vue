@@ -186,6 +186,25 @@ import axios from 'axios'
             this.length = parseInt(this.amount  / 12)
             if (this.amount % 12 != 0) this.length++
 
+            console.log(this.select)
+            switch (this.select){
+              case "Price: Low to High":
+                newProducts.sort(function(a, b) {
+                  return a.price > b.price ? 1 : -1;
+                })
+                break
+
+              case "Price: High to Low":
+                newProducts.sort(function(a, b) {
+                  return a.price < b.price ? 1 : -1 
+                })
+                break
+
+              default:
+                console.log("no")
+                break
+            }
+            console.log(newProducts)
             return newProducts.slice((this.page-1)*12, ((this.page-1)*12)+12)
           }
         }
