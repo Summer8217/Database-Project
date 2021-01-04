@@ -6,6 +6,14 @@
          class="col-md-3 col-sm-3 col-xs-12"
         >
           <v-card outlined>
+            <v-card-title class="pb-0">Type</v-card-title>
+            <v-container class="pt-0" fluid>
+              <v-checkbox v-model="type" value="Air Purifier" label="Air Purifier" hide-details dense></v-checkbox>
+              <v-checkbox v-model="type" value="Vacuum" label="Vacuum" hide-details dense></v-checkbox>
+              <v-checkbox v-model="type" value="Fan" label="Fan" hide-details dense></v-checkbox>
+              <v-checkbox v-model="type" value="Light" label="Light" hide-details dense></v-checkbox>
+            </v-container>
+            <v-divider></v-divider>
             <v-card-title>Price</v-card-title>
             <v-range-slider
               v-model="range"
@@ -126,6 +134,7 @@ import axios from 'axios'
             length: 10,
             min:0,
             max:100000,
+            type: ['Air Purifier', 'Vacuum', 'Fan', 'Light'],
             select:'Popularity',
             options: [
                 'Default',
@@ -170,6 +179,9 @@ import axios from 'axios'
           },
           range: function(){
             this.page = 1
+          },
+          type: function(){
+            console.log(this.type)
           }
         },
         
@@ -177,9 +189,11 @@ import axios from 'axios'
           filterProduct: function(){
             let low = this.range[0]
             let high = this.range[1]
+            let type = this.type
+
 
             var newProducts = this.products.filter(function(product){
-              return product.price >= low && product.price <= high
+              return product.price >= low && product.price <= high && (product.name.indexOf(type[0]) > -1 || product.name.indexOf(type[1]) > -1 || product.name.indexOf(type[2]) > -1 || product.name.indexOf(type[3]) > -1)
             })
 
             this.amount = newProducts.length
