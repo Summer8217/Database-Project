@@ -12,7 +12,6 @@ import Login from '@/components/Login'
 import KeyinUser from '@/components/KeyinUser'
 import Login_admin from '@/components/Login_admin'
 import KeyinUser_admin from '@/components/KeyinUser_admin'
-import KeyinPswd_admin from '@/components/KeyinPswd_admin'
 import Admin_home from '@/components/Admin_home'
 import Admin_user from '@/components/Admin_user'
 import Admin_merchandise from '@/components/Admin_merchandise'
@@ -90,11 +89,6 @@ export default new Router({
               component:KeyinUser_admin,
               name:'KeyinUser_admin'
             },
-            {
-              path:'keyinPswd_admin',
-              component:KeyinPswd_admin,
-              name:'KeyinPswd_admin'
-            }
           ]
         }
       ]
