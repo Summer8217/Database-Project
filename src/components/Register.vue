@@ -163,7 +163,6 @@
             postForm.append("MemberPhone",this.registerPhoneNumber);
             postForm.append("MemberEmail",this.registerEmail);
             postForm.append("MemberPassword",this.registerPassword);
-            alert('sadsa');
             var config = {
               method:'post',
               url:'http://localhost:3000/register',
@@ -172,12 +171,15 @@
             };
             axios(config)
               .then(function (response) {
-                  //handle success
-                  alert('sadsa');
+                  if(response.status=="200"){
+                    if(confirm("註冊成功") || !confirm("註冊成功")){
+                      window.location="/login";
+                    }
+                  }
               })
               .catch(function (response) {
                   //handle error
-                  alert('aaaa');
+                  alert('此電子郵件已註冊過會員');
               })
           }else{
             alert(JSON.stringify(this.errors));
