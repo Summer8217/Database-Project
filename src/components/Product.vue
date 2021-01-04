@@ -53,7 +53,7 @@
             <p class="subtitle-1 font-weight-light pt-3 text-center">YOU MIGHT ALSO LIKE</p>
             <v-divider></v-divider>
             <div class="row text-center">
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center">
+              <div class="col-md-2 col-sm-4 col-xs-12 text-center" :key="pro.id" v-for="pro in products">
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="200"
@@ -64,14 +64,14 @@
                     <v-img
                       class="white--text align-end"
                       height="200px"
-                      :src="require('../assets/img/home/deal1.jpg')"
+                      :src="'data:image/png;base64, '+pro.image"
                     >
-                      <v-card-title>Bags & Purses </v-card-title>
+                      <v-card-title>{{pro.type}} </v-card-title>
                     </v-img>
 
                     <v-card-text class="text--primary text-center">
-                      <div>Upto 60% + Extra 10%</div>
-                      <div>Baggit, Zara, Fossil</div>
+                      <div>{{pro.name}}</div>
+                      <div>${{pro.price}}</div>
                     </v-card-text>
 
                     <div class="text-center">
@@ -79,171 +79,7 @@
                         class="ma-2"
                         outlined
                         color="info"
-                      >
-                        Explore
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center" >
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                  >
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="require('../assets/img/home/deal2.jpg')"
-                    >
-                      <v-card-title>T-Shirt </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-center">
-                      <div>Upto 50%</div>
-                      <div>Zara, Selected, Celio</div>
-                    </v-card-text>
-
-                    <div class="text-center">
-                      <v-btn
-                        class="ma-2"
-                        outlined
-                        color="info"
-                      >
-                        Explore
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center" >
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                  >
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="require('../assets/img/home/deal3.jpg')"
-                    >
-                      <v-card-title>Jeans </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-center">
-                      <div>Upto 60% + Extra 10%</div>
-                      <div>Jack & Jones, Levis</div>
-                    </v-card-text>
-
-                    <div class="text-center">
-                      <v-btn
-                        class="ma-2"
-                        outlined
-                        color="info"
-                      >
-                        Explore
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center" >
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                  >
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="require('../assets/img/shop/5.jpg')"
-                    >
-                      <v-card-title>Shirts </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-center">
-                      <div>Upto 60% + Extra 10%</div>
-                      <div>Nike, Adidas, Puma</div>
-                    </v-card-text>
-
-                    <div class="text-center">
-                      <v-btn
-                        class="ma-2"
-                        outlined
-                        color="info"
-                      >
-                        Explore
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center" >
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                  >
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="require('../assets/img/home/deal4.jpg')"
-                    >
-                      <v-card-title>Shoes </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-center">
-                      <div>Upto 60% + Extra 10%</div>
-                      <div>Nike, Adidas, Puma</div>
-                    </v-card-text>
-
-                    <div class="text-center">
-                      <v-btn
-                        class="ma-2"
-                        outlined
-                        color="info"
-                      >
-                        Explore
-                      </v-btn>
-                    </div>
-                  </v-card>
-                </v-hover>
-              </div>
-              <div class="col-md-2 col-sm-4 col-xs-12 text-center" >
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="200"
-                >
-                  <v-card
-                    :elevation="hover ? 16 : 2"
-                  >
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="require('../assets/img/shop/3.jpg')"
-                    >
-                      <v-card-title>Jackets </v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary text-center">
-                      <div>Upto 60% + Extra 10%</div>
-                      <div>Nike, Adidas, Puma</div>
-                    </v-card-text>
-
-                    <div class="text-center">
-                      <v-btn
-                        class="ma-2"
-                        outlined
-                        color="info"
+                        :href="'../product/'+pro.id"
                       >
                         Explore
                       </v-btn>
@@ -322,6 +158,7 @@ import axios from 'axios'
                     disabled: true,
                 },
             ],
+            products:[]
         }),
         mounted: function(){
           axios.get('/api/merchandise/'+ this.$route.params.id)
@@ -334,6 +171,14 @@ import axios from 'axios'
             this.desc = response.data.detail_info;
             this.price = response.data.price;
             console.log(this.price);
+          })
+          .catch(error => {
+            console.log(error)
+          }),
+          axios.get("/api/get-all")
+          .then(response => {
+            this.products = response.data.products.slice(0, 6);
+            console.log(this.products)
           })
           .catch(error => {
             console.log(error)

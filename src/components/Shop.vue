@@ -174,15 +174,9 @@ import axios from 'axios'
         },
 
         watch: {
-          page: function(){
-            console.log(this.page)
-          },
           range: function(){
             this.page = 1
           },
-          type: function(){
-            console.log(this.type)
-          }
         },
         
         computed: {
@@ -218,7 +212,6 @@ import axios from 'axios'
                 console.log("no")
                 break
             }
-            console.log(newProducts)
             return newProducts.slice((this.page-1)*12, ((this.page-1)*12)+12)
           }
         }
