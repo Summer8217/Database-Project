@@ -27,25 +27,8 @@
       <v-btn v-on="on" icon @click="login">
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
-      <v-btn v-on="on" icon>
-        <v-badge
-          content="2"
-          value="2"
-          color="green"
-          overlap
-        >
-          <v-icon>mdi-bell</v-icon>
-        </v-badge>
-      </v-btn>
       <v-btn v-on="on" href="/cart" icon>
-        <v-badge
-          content="2"
-          value="2"
-          color="green"
-          overlap
-        >
-          <v-icon>mdi-cart</v-icon>
-        </v-badge>
+        <v-icon>mdi-cart</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -60,9 +43,6 @@
         <a href="/shop" class="v-btn">
           <span>Shop</span>
         </a>
-        <v-btn href="/blog">
-          <span>About</span>
-        </v-btn>
       </v-bottom-navigation>
     </v-content>
       <router-view/>
