@@ -24,11 +24,30 @@
         @keydown.enter="search(keyword)"
       />
       <v-spacer />
-      <v-btn @click="judge()" icon>
-        {{isLogin}}
-      </v-btn>
+      <div class="text-center">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-if="account == 1" icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-account-circle</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="item in items"
+              :key="item.title"
+              :href="item.link"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+
       <v-btn v-on="on" href="/cart" icon>
         <v-icon>mdi-cart</v-icon>
+      </v-btn>
+      <v-btn @click="judge()" icon>
+        {{isLogin}}
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -37,10 +56,10 @@
         color="primary"
         horizontal
       >
-        <a href="/" class="v-btn">
+        <a href="/" class="v-btn" style="fontSize:14px">
           <span>Home</span>
         </a>
-        <a href="/shop" class="v-btn">
+        <a href="/shop" class="v-btn" style="fontSize:14px">
           <span>Shop</span>
         </a>
       </v-bottom-navigation>
@@ -100,16 +119,23 @@
     export default {
         data () {
             return {
+                items: [
+                  { title: 'Profile', link:"/profile" },
+                  { title: 'Order', link:"/" },
+                ],
                 activeBtn: 1,
-                isLogin: ""
+                isLogin: "",
+                account: 0
             }
         },
         created() {
           if(localStorage.getItem("accessToken") != null){
             this.isLogin = "登出";
+            this.account = 1;
           }
           else{
             this.isLogin = "登入";
+            this.account = 0;
           }
         },
         methods: {
@@ -120,10 +146,11 @@
           judge(){
             console.log("in")
             if(localStorage.getItem("accessToken") != null){
-              alert("已登出");
-              this.$router.push({ name: "Home" });
               this.isLogin = "登入"
               localStorage.removeItem("accessToken");
+              alert("已登出");
+              this.$router.push({ name: "Home" });
+              location.reload();
             }
             else{
               this.$router.push({ name: "Login" });
