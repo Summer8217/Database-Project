@@ -24,7 +24,7 @@
         @keydown.enter="search(keyword)"
       />
       <v-spacer />
-      <v-btn v-on:click="judge" icon>
+      <v-btn @click="judge()" icon>
         {{isLogin}}
       </v-btn>
       <v-btn v-on="on" href="/cart" icon>
@@ -104,20 +104,6 @@
                 isLogin: ""
             }
         },
-        methods:{
-          judge: function(){
-            if(localStorage.getItem("accessToken") != null){
-              alert("已登出");
-              this.$router.push({ name: "Home" });
-              this.isLogin = "登入"
-              localStorage.removeItem("accessToken");
-            }
-            else{
-              this.$router.push({ name: "Login" });
-              this.isLogin = "登出"
-            }  
-          },
-        },
         created() {
           if(localStorage.getItem("accessToken") != null){
               this.isLogin = "登出";
@@ -130,6 +116,19 @@
           search(keyword) {
             console.log('search:' + keyword);
             this.$router.push({path:'/search', query:{keyword:keyword}});
+          },
+          judge(){
+            console.log("in")
+            if(localStorage.getItem("accessToken") != null){
+              alert("已登出");
+              this.$router.push({ name: "Home" });
+              this.isLogin = "登入"
+              localStorage.removeItem("accessToken");
+            }
+            else{
+              this.$router.push({ name: "Login" });
+              this.isLogin = "登出"
+            }  
           },
           login(){
             this.$router.push({name:'Login'});
