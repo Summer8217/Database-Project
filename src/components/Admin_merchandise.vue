@@ -110,10 +110,17 @@
             console.log(this.image);
             var config = {
               method:'post',
-              url:'http://localhost:3000/Admin_merchandise',
+              url:'/api/add-merchandise',
               data:dataForm,
-              headers:{'Content-Type': 'multipart/form-data'}
+              headers:{'Content-Type': 'multipart/form-data','Authorization': localStorage.getItem("accessToken")}
             };
+            axios(config)
+              .then(function (response) {
+                alert("加入商品成功!");
+                window.location="/Admin_merchandise";
+              })
+              .catch(function (response) {
+              })
         },
         onUploadRemove: async function() {
             this.picBase64 = null;
