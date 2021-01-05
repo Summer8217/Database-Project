@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "material-design-icons-iconfont": "^5.0.1",
     "vue": "^2.5.2",
+    "vue-luck-draw": "^3.3.5",
     "vue-router": "^3.0.1",
     "vuetify": "^2.2.14"
   },
