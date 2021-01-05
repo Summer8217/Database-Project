@@ -173,18 +173,6 @@ import axios from 'axios'
           toProduct (productID){
             this.$router.push({ path: '/product/'+productID});
           },
-          test (){
-            axios.get("https://api.mocki.io/v1/1ebc4623")
-            .then(response => {
-              this.products = response.data.products;
-              this.length = parseInt(response.data.amount / 12)
-              if (response.data.amount % 12 != 0) this.length++
-              this.amount = response.data.amount;
-            })
-            .catch(error => {
-              console.log(error)
-            })
-          }
         },
         watch: {
           range: function(){
