@@ -277,7 +277,6 @@
 
                   <v-card-text class="text--primary text-center">
                     <div>Upto 80% + Extra 10%</div>
-                    <div>Nike, Adidas, Puma</div>
                   </v-card-text>
 
                   <div class="text-center">
