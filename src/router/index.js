@@ -19,6 +19,7 @@ import Admin_order from '@/components/Admin_order'
 import Order from '@/components/Order'
 import SearchResult from '@/components/SearchResult'
 import User from '@/components/User'
+import Rotary from '@/components/Rotary'
 Vue.use(Router)
 
 export default new Router({
@@ -31,6 +32,11 @@ export default new Router({
           path:'/',
           component:Home,
           name:'Home'
+        },
+        {
+          path:'/rotary',
+          component:Rotary,
+          name:'Rotary'
         },
         {
           path:'/shop',
