@@ -4,39 +4,23 @@
       <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-12">
           <v-carousel>
-<<<<<<< HEAD
-            <div v-for="img in image" :key="img.src">
-              <v-carousel-item
-              :src="`/static/img/shop/${img.src}`"
-              >
-              </v-carousel-item>
-            </div>
-=======
             <v-carousel-item
               :src="'data:image/png;base64, '+ image"
             >
             </v-carousel-item>
 
->>>>>>> yang
           </v-carousel>
         </div>
         <div class="col-md-7 col-sm-7 col-xs-12">
           <v-breadcrumbs class="pb-0" :items="breadcrums"></v-breadcrumbs>
           <div class="pl-6">
-<<<<<<< HEAD
-            <p class="display-1 mb-0">Honeywell 空氣清淨機</p>
-=======
             <p class="display-1 mb-0">{{name}}</p>
->>>>>>> yang
             <v-card-actions class="pa-0">
               <p class="headline font-weight-light pt-3">${{price}}</p>
             </v-card-actions>
-<<<<<<< HEAD
-=======
             <p class="subtitle-1">
               {{desc}}
             </p>
->>>>>>> yang
             <p class="title">ITEMS</p>
 
             <v-text-field
@@ -59,28 +43,11 @@
         <div class="col-sm-12 col-xs-12 col-md-12">
           <v-tabs>
             <v-tab >Description</v-tab>
-<<<<<<< HEAD
-            <v-tab >Materials</v-tab>
-=======
->>>>>>> yang
             <v-tab-item>
               <p class="pt-10 subtitle-1">
                 {{desc}}
               </p>
             </v-tab-item>
-<<<<<<< HEAD
-            <v-tab-item>
-              <p class="pt-10 subtitle-1 font-weight-thin">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ultricies mi eget mauris pharetra et. Vel pretium lectus quam id leo in vitae turpis
-                massa. Orci dapibus ultrices in iaculis nunc. At auctor urna nunc id cursus metus. Integer feugiat
-                scelerisque varius morbi enim nunc. Aliquam sem et tortor consequat id porta nibh venenatis cras.
-                Pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus. Malesuada nunc vel risus
-                commodo viverra maecenas. Neque volutpat ac tincidunt vitae semper quis.
-              </p>
-            </v-tab-item>
-=======
->>>>>>> yang
           </v-tabs>
           <v-card-text
             class="pa-0 pt-4"
@@ -175,22 +142,10 @@
 import axios from 'axios'
     export default {
         data: () => ({
-<<<<<<< HEAD
-            testName: '',
-            rating:4.5,
-            image: [
-              {"src":"1.jpg"},
-              {"src":"2.jpg"},
-              {"src":"3.jpg"},
-              {"src":"4.jpg"}
-            ],
-            buyNum: 1,
-=======
             name:'',
             image:'',
             desc:'',
             price:0,
->>>>>>> yang
             breadcrums: [
                 {
                     text: 'Home',
@@ -203,25 +158,12 @@ import axios from 'axios'
                     href: '/shop',
                 },
                 {
-<<<<<<< HEAD
-                    text: 'Honeywell 空氣清淨機',
-                    disabled: true,
-                    href: '/',
-=======
                     text: '',
                     disabled: true,
->>>>>>> yang
                 },
             ],
             products:[]
         }),
-<<<<<<< HEAD
-        methods:{
-
-        },
-        mounted: function(){
-          console.log(this.$route.query.id)
-=======
         mounted: function(){
           axios.get('/api/merchandise/'+ this.$route.params.id)
           .then(response =>{
@@ -245,7 +187,6 @@ import axios from 'axios'
           .catch(error => {
             console.log(error)
           })
->>>>>>> yang
         },
     }
 </script>

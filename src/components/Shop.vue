@@ -46,15 +46,6 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-<<<<<<< HEAD
-            <v-btn
-              block
-              elevation="2"
-              color="primary"
-              @click="test()"
-            >Apply</v-btn>
-=======
->>>>>>> yang
             
           </v-card>
         </div>
@@ -87,11 +78,7 @@
                     class="white--text align-end"
                     :aspect-ratio="16/9"
                     height="200px"
-<<<<<<< HEAD
-                    :src="`/static/img/shop/${pro.src}`"
-=======
                     :src="'data:image/png;base64, '+pro.image"
->>>>>>> yang
                   >
                     <v-card-title>{{pro.type}} </v-card-title>
                     <v-expand-transition>
@@ -100,11 +87,7 @@
                         class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
                         style="height: 100%;"
                       >
-<<<<<<< HEAD
                         <v-btn v-if="hover" @click="toProduct(pro.id)" class="" outlined>VIEW</v-btn>
-=======
-                        <v-btn v-if="hover" :href="'product/'+pro.id" class="" outlined>VIEW</v-btn>
->>>>>>> yang
                       </div>
 
                     </v-expand-transition>
@@ -175,20 +158,12 @@ import axios from 'axios'
             products:[]
         }),
         mounted: function(){
-<<<<<<< HEAD
-          axios.get("https://api.mocki.io/v1/93c80dfe")
-=======
           axios.get("/api/get-all")
->>>>>>> yang
           .then(response => {
             this.products = response.data.products;
             this.length = parseInt(response.data.amount / 12)
             if (response.data.amount % 12 != 0) this.length++
-<<<<<<< HEAD
             this.amount = response.data.amount;
-=======
-            this.amount = response.data.products.length;
->>>>>>> yang
           })
           .catch(error => {
             console.log(error)

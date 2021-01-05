@@ -32,11 +32,7 @@
       ></v-text-field-->
     </v-card-text>
     <v-card-actions>
-<<<<<<< HEAD
       <v-spacer><v-btn  class="mr-2" v-text="'沒有帳戶，註冊?'" href="/register"></v-btn></v-spacer>
-=======
-      <v-spacer><v-btn  class="mr-2" v-text="'沒有帳戶，註冊?'"></v-btn></v-spacer>
->>>>>>> yang
       <v-btn color="primary" class="mr-2" v-text="'繼續'" v-on:click="verifyUser">
       </v-btn>
     </v-card-actions>
@@ -47,11 +43,7 @@
 import axios from 'axios' 
 export default {
   name: "KeyinUser",
-<<<<<<< HEAD
   props: ["accountId", "password","isLogin"],
-=======
-  props: ["accountId", "password"],
->>>>>>> yang
   data() {
     return {
       textFieldError: true,
@@ -89,12 +81,8 @@ export default {
       .then((response) => {
         if (response.data.message=="successful") {
           //this.$emit("update:name", response.data.name);
-<<<<<<< HEAD
           localStorage.setItem("accessToken",response.data.token);
           this.$router.push({ name: "Home"});
-=======
-          this.$router.push({ name: "Home" });
->>>>>>> yang
           alert("Success")
         } else {
           this.setTextFieldError(false, response.data.message);

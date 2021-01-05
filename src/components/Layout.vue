@@ -24,13 +24,8 @@
         @keydown.enter="search(keyword)"
       />
       <v-spacer />
-<<<<<<< HEAD
       <v-btn v-on:click="judge" icon>
         {{isLogin}}
-=======
-      <v-btn v-on="on" icon @click="login">
-        <v-icon>mdi-account-circle</v-icon>
->>>>>>> yang
       </v-btn>
       <v-btn v-on="on" href="/cart" icon>
         <v-icon>mdi-cart</v-icon>
@@ -48,12 +43,6 @@
         <a href="/shop" class="v-btn">
           <span>Shop</span>
         </a>
-<<<<<<< HEAD
-        <v-btn href="/blog">
-          <span>About</span>
-        </v-btn>
-=======
->>>>>>> yang
       </v-bottom-navigation>
     </v-content>
       <router-view/>
