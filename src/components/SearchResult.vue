@@ -6,14 +6,6 @@
          class="col-md-3 col-sm-3 col-xs-12"
         >
           <v-card outlined>
-            <v-card-title class="pb-0">Type</v-card-title>
-            <v-container class="pt-0" fluid>
-              <v-checkbox v-model="type" value="Air Purifier" label="Air Purifier" hide-details dense></v-checkbox>
-              <v-checkbox v-model="type" value="Vacuum" label="Vacuum" hide-details dense></v-checkbox>
-              <v-checkbox v-model="type" value="Fan" label="Fan" hide-details dense></v-checkbox>
-              <v-checkbox v-model="type" value="Light" label="Light" hide-details dense></v-checkbox>
-            </v-container>
-            <v-divider></v-divider>
             <v-card-title>Price</v-card-title>
             <v-range-slider
               v-model="range"
@@ -46,6 +38,11 @@
                 ></v-text-field>
               </v-col>
             </v-row>
+            <v-btn
+              block
+              elevation="2"
+              color="primary"
+            >Apply</v-btn>
             
           </v-card>
         </div>
@@ -67,7 +64,7 @@
           <v-divider></v-divider>
 
           <div class="row text-center">
-            <div class="col-md-3 col-sm-6 col-xs-12" :key="pro.id" v-for="pro in filterProduct">
+            <div class="col-md-3 col-sm-6 col-xs-12" :key="pro.id" v-for="pro in products.slice((page-1)*12, (page*12))">
               <v-hover v-slot:default="{ hover }">
                 <v-card
                   class="mx-auto"
@@ -87,7 +84,7 @@
                         class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3 white--text"
                         style="height: 100%;"
                       >
-                        <v-btn v-if="hover" @click="toProduct(pro.id)" class="" outlined>VIEW</v-btn>
+                        <v-btn v-if="hover" :href="'/product/'+pro.id" class="" outlined>VIEW</v-btn>
                       </div>
 
                     </v-expand-transition>
@@ -127,6 +124,7 @@
 import axios from 'axios'
     export default {
         data: () => ({
+            kw:'',
             amount: 100,
             show: [1, 12],
             page:1,
@@ -134,7 +132,6 @@ import axios from 'axios'
             length: 10,
             min:0,
             max:100000,
-            type: ['Air Purifier', 'Vacuum', 'Fan', 'Light'],
             select:'Popularity',
             options: [
                 'Default',
@@ -157,66 +154,42 @@ import axios from 'axios'
             ],
             products:[]
         }),
+        created: function(){
+          this.length = 1
+        },
+        methods: {
+        },
         mounted: function(){
-          axios.get("/api/get-all")
+          axios.get('/api/search/' + this.$route.query.keyword)
           .then(response => {
+            console.log(response.data.products);
+            //console.log(this.products);
+            document.title= this.$route.query.keyword + ' - Search Result';
             this.products = response.data.products;
-            this.length = parseInt(response.data.amount / 12)
-            if (response.data.amount % 12 != 0) this.length++
+            this.length = parseInt(response.data.amount / 12) + 1
             this.amount = response.data.amount;
           })
           .catch(error => {
             console.log(error)
           })
         },
-        methods: {
-          toProduct (productID){
-            this.$router.push({ path: '/product/'+productID});
-          },
-        },
-        watch: {
-          range: function(){
-            this.page = 1
-          },
-        },
         
-        computed: {
-          filterProduct: function(){
-            let low = this.range[0]
-            let high = this.range[1]
-            let type = this.type
-
-
-            var newProducts = this.products.filter(function(product){
-              return product.price >= low && product.price <= high && (product.name.indexOf(type[0]) > -1 || product.name.indexOf(type[1]) > -1 || product.name.indexOf(type[2]) > -1 || product.name.indexOf(type[3]) > -1)
+        watch: {
+          '$route' (to, from){
+            axios.get('/api/search/' + this.$route.query.keyword)
+            .then(response => {
+            console.log(response.data.products);
+            //console.log(this.products);
+            document.title= this.$route.query.keyword + ' - Search Result';
+            this.products = response.data.products;
+            this.length = parseInt(response.data.amount / 12) + 1
+            this.amount = response.data.amount;
             })
-
-            this.amount = newProducts.length
-            this.length = parseInt(this.amount  / 12)
-            if (this.amount % 12 != 0) this.length++
-
-            console.log(this.select)
-            switch (this.select){
-              case "Price: Low to High":
-                newProducts.sort(function(a, b) {
-                  return a.price > b.price ? 1 : -1;
-                })
-                break
-
-              case "Price: High to Low":
-                newProducts.sort(function(a, b) {
-                  return a.price < b.price ? 1 : -1 
-                })
-                break
-
-              default:
-                console.log("no")
-                break
-            }
-            return newProducts.slice((this.page-1)*12, ((this.page-1)*12)+12)
+            .catch(error => {
+             console.log(error)
+            })
           }
         }
-        
         
         
     }

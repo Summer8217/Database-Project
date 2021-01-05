@@ -128,6 +128,8 @@
     </v-card>
   </div>
 </template>
+
+
 <script>
     import axios from 'axios'
     export default {

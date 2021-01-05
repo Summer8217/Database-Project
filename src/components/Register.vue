@@ -171,11 +171,8 @@
             };
             axios(config)
               .then(function (response) {
-                  if(response.status=="200"){
-                    if(confirm("註冊成功") || !confirm("註冊成功")){
-                      window.location="/login";
-                    }
-                  }
+                alert("註冊成功!");
+                window.location="/login";
               })
               .catch(function (response) {
                   //handle error

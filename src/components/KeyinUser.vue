@@ -83,11 +83,12 @@ export default {
           //this.$emit("update:name", response.data.name);
           localStorage.setItem("accessToken",response.data.token);
           this.$router.push({ name: "Home"});
-          alert("Success")
+          alert("登入成功");
+          location.reload();
         } else {
           this.setTextFieldError(false, response.data.message);
           this.$refs.form.validate();
-          alert("Not Success")
+          alert("登入失敗")
         }
       })
       .catch((error) => {

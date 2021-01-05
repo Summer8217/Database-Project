@@ -16,34 +16,19 @@
       <v-text-field
         flat
         solo-inverted
+        v-model="keyword"
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Search"
         class="hidden-sm-and-down pl-10 ml-4"
+        @keydown.enter="search(keyword)"
       />
       <v-spacer />
-      <v-btn v-on:click="judge" icon>
+      <v-btn @click="judge()" icon>
         {{isLogin}}
       </v-btn>
-      <v-btn v-on="on" icon>
-        <v-badge
-          content="2"
-          value="2"
-          color="green"
-          overlap
-        >
-          <v-icon>mdi-bell</v-icon>
-        </v-badge>
-      </v-btn>
       <v-btn v-on="on" href="/cart" icon>
-        <v-badge
-          content="2"
-          value="2"
-          color="green"
-          overlap
-        >
-          <v-icon>mdi-cart</v-icon>
-        </v-badge>
+        <v-icon>mdi-cart</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -58,9 +43,6 @@
         <a href="/shop" class="v-btn">
           <span>Shop</span>
         </a>
-        <v-btn href="/blog">
-          <span>About</span>
-        </v-btn>
       </v-bottom-navigation>
     </v-content>
       <router-view/>
@@ -122,8 +104,21 @@
                 isLogin: ""
             }
         },
-        methods:{
-          judge: function(){
+        created() {
+          if(localStorage.getItem("accessToken") != null){
+            this.isLogin = "登出";
+          }
+          else{
+            this.isLogin = "登入";
+          }
+        },
+        methods: {
+          search(keyword) {
+            console.log('search:' + keyword);
+            this.$router.push({path:'/search', query:{keyword:keyword}});
+          },
+          judge(){
+            console.log("in")
             if(localStorage.getItem("accessToken") != null){
               alert("已登出");
               this.$router.push({ name: "Home" });
@@ -132,16 +127,10 @@
             }
             else{
               this.$router.push({ name: "Login" });
-              this.isLogin = "登出"
             }  
           },
-        },
-        created() {
-          if(localStorage.getItem("accessToken") != null){
-              this.isLogin = "登出";
-          }
-          else{
-            this.isLogin = "登入";
+          login(){
+            this.$router.push({name:'Login'});
           }
         },
     }

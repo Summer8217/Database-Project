@@ -109,34 +109,12 @@ export default {
           case "KeyinUser_admin":
             this.setCard("管理者登入", "使用您的管理者帳戶");
             break;
-          case "KeyinPswd_admin":
-            if (this.user.accountId === "") {
-              this.$router.push({ name: "KeyinUser_admin" });
-            }
-            this.setCard("歡迎使用", "", true);
-            this.user.password = "";
-            this.transitionName = "slide-left";
-            break;
         }
       },
       immediate: true,
     },
-    /*"card.removeMode": {
-      handler(newValue, oldValue) {
-        if (newValue) {
-          this.setCard("移除帳戶", "從這個瀏覽器中移除");
-        } else {
-          this.setCard("選擇帳戶");
-        }
-      },
-    },*/
   },
 };
-/*:username.sync="user.username"
-                :account-id.sync="user.accountId"
-                :password.sync="user.password"
-                :remove-mode.sync="card.removeMode"
-                :loading.sync="card.loading"*/
 </script>
 
 
