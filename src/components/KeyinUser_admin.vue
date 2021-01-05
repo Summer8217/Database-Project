@@ -83,7 +83,8 @@ export default {
           //this.$emit("update:name", response.data.name);
           localStorage.setItem("accessToken",response.data.token);
           this.$router.push({ name: "Admin_merchandise" });
-          alert("登入成功")
+          alert("登入成功");
+          location.reload();
         } else {
           this.setTextFieldError(false, response.data.message);
           this.$refs.form.validate();

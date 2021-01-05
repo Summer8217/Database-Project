@@ -127,7 +127,6 @@
             }
             else{
               this.$router.push({ name: "Login" });
-              this.isLogin = "登出"
             }  
           },
           login(){
