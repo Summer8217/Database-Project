@@ -49,13 +49,14 @@
                 </v-list-item></td>
                 <td></td>
                 <td></td>
-                <td>${{this.totalPrice}}</td>
+                <td>${{totalPrice}}</td>
               </tr>
               </tbody>
             </template>
           </v-simple-table>
         </v-col>
         <v-col :cols="12" md="9" sm="12" >
+            <v-select class="pa-0" v-model="select" :items="options" style="margin-bottom: -20px;" outlined dense></v-select>
             <span>請選擇取貨方式: </span><br>
             <input type="radio" id="toHome" name="shipmentType" value="宅配到府" v-model="shipmentType">
             <label for="toHome">宅配到府</label>
@@ -74,7 +75,7 @@
             <label for="ATM">ATM轉帳</label>
         </v-col>
         <div class="text-center">
-          <v-btn href = "/" class="primary white--text mt-5" outlined>Place Order</v-btn>
+          <v-btn href = "/" class="primary white--text mt-5" outlined @click="placeOrder()">Place Order</v-btn>
         </div>
       </v-row>
     </v-container>
@@ -120,42 +121,114 @@
   </div>
 </template>
 <script>
+    import axios from 'axios'
     export default {
         data() {
         return {
           shipmentType:"宅配到府",
           paymentType:"信用卡付款",
           goods_list:[],
-          totalPrice:0
+          totalPrice:0,
+          coupon_list:[],
+          select:'None',
+          options: [
+              'None',
+          ],
         };
         
       },
-      created(){
-         console.log('created')
+        watch:{
+          select: function(newVal, oldVal){
+              console.log(newVal)
+              console.log(oldVal)
+              console.log('watch select')
+              this.setTotalPrice()
+          },
+        },
+       created(){
+         // show cart item
+          console.log('created')
           var config={
             method: 'get',
             url: '/api/get-cart',
             headers: {'Authorization': localStorage.getItem("accessToken")}
           };
           axios(config).then((response)=>{
-            console.log('getShopCarts')
+            console.log('getShopCartssssss')
             var totalPrice = 0
             this.goods_list = response.data
+            console.log(this.goods_list)
             this.goods_list.forEach(element => {
                 totalPrice += element.price * element.quantity
             })
             this.totalPrice = totalPrice
-            console.log("aaaaaaaaaaaaaaa")
             console.log(this.totalPrice)
           });
-      },
-      methods:{
+
+          // show coupon
+          console.log('getCoupon')
+          var config1={
+            method: 'get',
+            url: '/api/get-coupon',
+            headers: {'Authorization': localStorage.getItem("accessToken")}
+          };
+          axios(config1).then((response)=>{
+            this.coupon_list = response.data
+            
+            this.coupon_list.forEach(element => {
+                this.options.push(element.code)
+            })
+          });
+        },
+        methods:{
           setTotalPrice(){
+            console.log('setTotalPrice')
             var goods_list = this.goods_list
             var totalPrice = 0
             for (var i = 0; i < goods_list.length; i++)
               totalPrice += goods_list[i].quantity * goods_list[i].price
             this.totalPrice = totalPrice
+
+            // Coupon     Testing!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (this.select != 'None')
+            {
+              var selectedCoupon = {};
+              console.log(this.coupon_list.length)
+              for (var i = 0; i < this.coupon_list.length; i++) {
+                console.log(this.select)
+                console.log(this.coupon_list[i].code)
+                if (this.select == this.coupon_list[i].code)
+                {
+                  console.log('ININ')
+                  selectedCoupon = this.coupon_list[i]
+                }
+              } 
+
+              console.log(selectedCoupon)
+              if (selectedCoupon.type == "折扣")
+                this.totalPrice *= selectedCoupon.content / 100
+              else
+                this.totalPrice -= selectedCoupon.content
+            }
+          },
+          placeOrder(){
+            var config={
+              method: 'post',
+              url: '/api/place-order',
+              data: {
+                coupon_code: false,
+                products:this.goods_list,
+                shipping_type: this.shipmentType,
+                payment_type: this.paymentType
+              },
+              headers: {'Authorization': localStorage.getItem("accessToken")}
+            };
+            if (this.select != "None")
+            {
+              config.data.coupon_code = this.select
+            }
+
+            axios(config).then((response)=>{})
           },
           deleteGoods(index, id){
             var config={
@@ -165,13 +238,15 @@
               
             };
         
-            alert('remove this item from your order?')
-            axios(config).then((response=>{
+            if(confirm('remove this item from your order?'))
+            {
+              axios(config).then((response)=>{
               this.goods_list.splice(index, 1)
               this.setTotalPrice()
-            }))
+            })
+            }
           }
-      }
+        },
     }
 </script>
 

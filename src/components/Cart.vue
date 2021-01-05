@@ -63,18 +63,6 @@
             <template v-slot:default>
               <tbody>
               <tr>
-                <td>Order Subtotal</td>
-                <td class="text-right" style="width: 50px;">$160.00</td>
-              </tr>
-              <tr>
-                <td>Shipping Charges</td>
-                <td class="text-right" style="width: 50px;">$10.00</td>
-              </tr>
-              <tr>
-                <td>Tax</td>
-                <td class="text-right" style="width: 50px;">$5.00</td>
-              </tr>
-              <tr>
                 <td>Total</td>
                 <td class="text-right" style="width: 50px;"><b>${{totalPrice}}</b></td>
               </tr>
@@ -82,7 +70,7 @@
             </template>
           </v-simple-table>
           <div class="text-center">
-            <v-btn href = "/Order" class="primary white--text mt-5" outlined>PROCEED TO PAY</v-btn>
+            <v-btn href = "/Order" class="primary white--text mt-5" outlined @click="placeOrder()">PROCEED TO PAY</v-btn>
           </div>
         </v-col>
       </v-row>
@@ -156,8 +144,7 @@
             goods_list: [
             ],
 
-        })
-        ,
+        }),
         created(){
           console.log('created')
           var config={
@@ -226,11 +213,13 @@
               
             };
         
-            alert('remove this item from your cart?')
-            axios(config).then((response=>{
-              this.goods_list.splice(index, 1)
-              this.setTotalPrice()
-            }))
+            if(confirm('remove this item from your cart?'))
+            {
+              axios(config).then((response)=>{
+                this.goods_list.splice(index, 1)
+                this.setTotalPrice()
+              })
+            }
           }
         }
     }
