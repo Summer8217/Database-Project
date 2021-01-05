@@ -17,6 +17,8 @@ import Admin_user from '@/components/Admin_user'
 import Admin_merchandise from '@/components/Admin_merchandise'
 import Admin_order from '@/components/Admin_order'
 import Order from '@/components/Order'
+import SearchResult from '@/components/SearchResult'
+import User from '@/components/User'
 Vue.use(Router)
 
 export default new Router({
@@ -36,7 +38,7 @@ export default new Router({
           name:'Shop'
         },
         {
-          path:'/product',
+          path:'/product/:id',
           component:Product,
           name:'Product'
         },
@@ -90,6 +92,18 @@ export default new Router({
               name:'KeyinUser_admin'
             },
           ]
+        },
+        {
+          path:'/search',
+          component:SearchResult,
+          props:true,
+          name:'SearchResult',
+        },
+        {
+          path:'/user',
+          component:User,
+          props:true,
+          name:'User',
         }
       ]
 
@@ -116,7 +130,8 @@ export default new Router({
           name:'Admin_order'
         }
       ]
-    }
+    },
+    
   ],
     mode:'history'
 },

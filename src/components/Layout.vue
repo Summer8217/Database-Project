@@ -16,34 +16,24 @@
       <v-text-field
         flat
         solo-inverted
+        v-model="keyword"
         hide-details
         prepend-inner-icon="mdi-magnify"
         label="Search"
         class="hidden-sm-and-down pl-10 ml-4"
+        @keydown.enter="search(keyword)"
       />
       <v-spacer />
+<<<<<<< HEAD
       <v-btn v-on:click="judge" icon>
         {{isLogin}}
-      </v-btn>
-      <v-btn v-on="on" icon>
-        <v-badge
-          content="2"
-          value="2"
-          color="green"
-          overlap
-        >
-          <v-icon>mdi-bell</v-icon>
-        </v-badge>
+=======
+      <v-btn v-on="on" icon @click="login">
+        <v-icon>mdi-account-circle</v-icon>
+>>>>>>> yang
       </v-btn>
       <v-btn v-on="on" href="/cart" icon>
-        <v-badge
-          content="2"
-          value="2"
-          color="green"
-          overlap
-        >
-          <v-icon>mdi-cart</v-icon>
-        </v-badge>
+        <v-icon>mdi-cart</v-icon>
       </v-btn>
     </v-app-bar>
     <v-content>
@@ -58,9 +48,12 @@
         <a href="/shop" class="v-btn">
           <span>Shop</span>
         </a>
+<<<<<<< HEAD
         <v-btn href="/blog">
           <span>About</span>
         </v-btn>
+=======
+>>>>>>> yang
       </v-bottom-navigation>
     </v-content>
       <router-view/>
@@ -142,6 +135,15 @@
           }
           else{
             this.isLogin = "登入";
+          }
+        },
+        methods: {
+          search(keyword) {
+            console.log('search:' + keyword);
+            this.$router.push({path:'/search', query:{keyword:keyword}});
+          },
+          login(){
+            this.$router.push({name:'Login'});
           }
         },
     }
