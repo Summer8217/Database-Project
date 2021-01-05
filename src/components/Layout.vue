@@ -24,9 +24,25 @@
         @keydown.enter="search(keyword)"
       />
       <v-spacer />
-      <v-btn v-if="account == 1" icon href="/profile">
-        <v-icon>mdi-account-circle</v-icon>
-      </v-btn>
+      <div class="text-center">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-if="account == 1" icon v-bind="attrs" v-on="on">
+              <v-icon>mdi-account-circle</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="item in items"
+              :key="item.title"
+              :href="item.link"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+
       <v-btn v-on="on" href="/cart" icon>
         <v-icon>mdi-cart</v-icon>
       </v-btn>
@@ -103,6 +119,10 @@
     export default {
         data () {
             return {
+                items: [
+                  { title: 'Profile', link:"/profile" },
+                  { title: 'Order', link:"/" },
+                ],
                 activeBtn: 1,
                 isLogin: "",
                 account: 0
