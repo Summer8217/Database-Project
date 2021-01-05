@@ -21,6 +21,7 @@ import SearchResult from '@/components/SearchResult'
 import User from '@/components/User'
 import Rotary from '@/components/Rotary'
 import Profile from '@/components/Profile'
+import History_order from '@/components/History_order'
 Vue.use(Router)
 
 export default new Router({
@@ -68,6 +69,11 @@ export default new Router({
           path:'/order',
           component:Order,
           name:'Order'         
+        },
+        {
+          path:'/history_order',
+          component:History_order,
+          name:'History_order'         
         },
         {
           path:'/register',

@@ -121,7 +121,7 @@
             return {
                 items: [
                   { title: 'Profile', link:"/profile" },
-                  { title: 'Order', link:"/" },
+                  { title: 'Order', link:"/history_order" },
                 ],
                 activeBtn: 1,
                 isLogin: "",
