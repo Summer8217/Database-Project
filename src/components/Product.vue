@@ -27,9 +27,10 @@
                 outlined
                 style="width:100px"
                 v-bind:value="this.buyNum"
+                v-model="buyNum"
                 dense
             ></v-text-field>
-            <v-btn class="primary white--text" outlined tile dense @click="addShopCart"><v-icon>mdi-cart</v-icon> ADD TO CART</v-btn>
+            <v-btn class="primary white--text" outlined tile dense @click="addShopCart()"><v-icon>mdi-cart</v-icon> ADD TO CART</v-btn>
 
           </div>
 
@@ -141,6 +142,7 @@
             name:'',
             image:'',
             desc:'',
+            buyNum:1,
             price:0,
             breadcrums: [
                 {
@@ -160,13 +162,20 @@
             ],
             products:[]
         }),
+        watch:{
+          buyNum: (newVal, oldVal) =>{
+              console.log(newVal)
+              console.log(oldVal)
+              this.buyNum = newVal;
+          },
+        },
         methods:{
           addShopCart(){
             var config={
               method: 'post',
               url: '/api/add-to-cart',
               headers: {'Authorization': localStorage.getItem("accessToken")},
-              data: {merchandise_id: this.$route.query.id , quantity: this.buyNum}
+              data: {merchandise_id: this.$route.params.id , quantity: this.buyNum}
             };
             axios(config).then((response=>{
 
