@@ -106,7 +106,7 @@
         },
         created() {
           if(localStorage.getItem("accessToken") != null){
-              this.isLogin = "登出";
+            this.isLogin = "登出";
           }
           else{
             this.isLogin = "登入";
