@@ -19,11 +19,8 @@ import Admin_order from '@/components/Admin_order'
 import Order from '@/components/Order'
 import SearchResult from '@/components/SearchResult'
 import User from '@/components/User'
-<<<<<<< HEAD
 import Rotary from '@/components/Rotary'
-=======
 import Profile from '@/components/Profile'
->>>>>>> 4a060fd399bc701a521f67e3b3186f21ae1bfed0
 Vue.use(Router)
 
 export default new Router({
