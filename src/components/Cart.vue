@@ -130,7 +130,6 @@
 </template>
 <script>
     import axios from 'axios'
-    import {getShopCarts, updateShopCart, deleteShopCart} from '../api/api'
     export default {
         data: () => ({
             rating: 4.5,
@@ -172,6 +171,8 @@
                 totalPrice += element.price * element.quantity
             })
             this.totalPrice = totalPrice
+            console.log("aaaaaaaaaaaaaaa")
+            console.log(this.totalPrice)
           });
         },
         methods:{
