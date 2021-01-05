@@ -171,7 +171,7 @@ import axios from 'axios'
         },
         methods: {
           toProduct (productID){
-            this.$router.push({ path: '/product', query: { id: productID }});
+            this.$router.push({ path: '/product/'+productID});
           },
           test (){
             axios.get("https://api.mocki.io/v1/1ebc4623")
