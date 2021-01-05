@@ -101,7 +101,7 @@
         },
         onUploadChange:function() {
             var dataForm = new FormData();
-            dataForm.append('MerchandiseImage', this.image);  //base64
+            dataForm.append('MerchandiseImage', this.image);  //blob
             dataForm.append('MerchandiseName', this.MName);
             dataForm.append('MerchandiseDescription', this.MDescription);
             dataForm.append('MerchandiseType', this.MType);
