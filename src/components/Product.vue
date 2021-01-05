@@ -24,8 +24,12 @@
             <v-text-field
                 outlined
                 style="width:100px"
-                :value="1"
+                v-bind:value="this.buyNum"
                 dense
+                append-outer-icon="+"
+                prepend-icon="–"
+                @click:append-outer="addCartNum(index, item.id)"
+                @click:prepend="reduceCartNum(index, item.id)"
             ></v-text-field>
             <v-btn class="primary white--text" outlined tile dense><v-icon>mdi-cart</v-icon> ADD TO CART</v-btn>
 
@@ -322,6 +326,7 @@
               {"src":"3.jpg"},
               {"src":"4.jpg"}
             ],
+            buyNum: 1,
             breadcrums: [
                 {
                     text: 'Home',
@@ -340,6 +345,9 @@
                 },
             ],
         }),
+        methods:{
+
+        },
         mounted: function(){
           console.log(this.$route.query.id)
         },

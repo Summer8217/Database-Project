@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <v-container>
@@ -17,65 +18,38 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
+              <tr v-for="(item,index) in goods_list" :key="index">
                 <td>
                   <v-list-item
                   key="1"
-                  @click=""
+                  @click="a"
                 >
                   <v-list-item-avatar>
                     <v-img :src="require('../assets/img/shop/1.jpg')"></v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title >Item 1</v-list-item-title>
+                    <v-list-item-title >{{item.name}}</v-list-item-title>
                     <v-list-item-subtitle>Lorem Ipsum</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item></td>
-                <td>$40.00</td>
+                <td>${{item.price}}</td>
                 <td>
                   <v-text-field
                     class="pt-10"
                     label="Outlined"
-                    style="width: 80px;"
+                    style="width: 120px;"
                     single-line
                     outlined
-                    value="2"
-                    type="number"
+                    append-outer-icon="+"
+                    prepend-icon="–"
+                    @click:append-outer="addCartNum(index, item.merchandise_id)"
+                    @click:prepend="reduceCartNum(index, item.merchandise_id)"
+                    v-bind:value="item.quantity"
                   ></v-text-field>
                 </td>
-                <td>$80.00</td>
-                <td><a>X</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <v-list-item
-                  key="1"
-                  @click=""
-                >
-                  <v-list-item-avatar>
-                    <v-img :src="require('../assets/img/shop/2.jpg')"></v-img>
-                  </v-list-item-avatar>
-
-                  <v-list-item-content>
-                    <v-list-item-title >Item 2</v-list-item-title>
-                    <v-list-item-subtitle>Lorem Ipsum</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item></td>
-                <td>$40.00</td>
-                <td>
-                  <v-text-field
-                    class="pt-10"
-                    label="Outlined"
-                    style="width: 80px;"
-                    single-line
-                    outlined
-                    value="2"
-                    type="number"
-                  ></v-text-field>
-                </td>
-                <td>$80.00</td>
-                <td><a>X</a></td>
+                <td>${{item.price * item.quantity}}</td>
+                <td><a @click="deleteGoods(index, item.merchandise_id)">X</a></td>
               </tr>
               </tbody>
             </template>
@@ -102,7 +76,7 @@
               </tr>
               <tr>
                 <td>Total</td>
-                <td class="text-right" style="width: 50px;"><b>$175.00</b></td>
+                <td class="text-right" style="width: 50px;"><b>${{totalPrice}}</b></td>
               </tr>
               </tbody>
             </template>
@@ -155,6 +129,8 @@
   </div>
 </template>
 <script>
+    import axios from 'axios'
+    import {getShopCarts, updateShopCart, deleteShopCart} from '../api/api'
     export default {
         data: () => ({
             rating: 4.5,
@@ -175,7 +151,85 @@
                     href: 'breadcrumbs_shirts',
                 },
             ],
+            totalPrice: 0,
+            goods_list: [
+            ],
+
         })
+        ,
+        created(){
+          console.log('created')
+          var config={
+            method: 'get',
+            url: '/api/get-cart',
+            headers: {'Authorization': localStorage.getItem("accessToken")}
+          };
+          axios(config).then((response)=>{
+            console.log('getShopCarts')
+            var totalPrice = 0
+            this.goods_list = response.data
+            this.goods_list.forEach(element => {
+                totalPrice += element.price * element.quantity
+            })
+            this.totalPrice = totalPrice
+          });
+        },
+        methods:{
+          addCartNum(index, id){
+            // send update to backend
+            var config={
+              method: 'put',
+              url: '/api/update-merchandise-quantity',
+              headers: {'Authorization': localStorage.getItem("accessToken")},
+              data: {id: id , quantity: this.goods_list[index].quantity+1}
+            };
+            console.log('addCartNum')
+            axios(config).then((response)=>{
+              this.goods_list[index].quantity += 1
+              this.setTotalPrice()
+            })
+          },
+          reduceCartNum(index, id){
+            console.log('reduceCartNum')
+            var config={
+              method: 'put',
+              url: '/api/update-merchandise-quantity',
+              headers: {'Authorization': localStorage.getItem("accessToken")},
+              data: {id: id , quantity: this.goods_list[index].quantity-1}
+            };
+            if (this.goods_list[index].quantity <= 1){
+              this.deleteGoods(index, id)
+            }
+            else{
+              axios(config).then((response)=>{
+                this.goods_list[index].quantity -= 1
+                this.setTotalPrice()
+              })
+            }
+          },
+
+          setTotalPrice(){
+            var goods_list = this.goods_list
+            var totalPrice = 0
+            for (var i = 0; i < goods_list.length; i++)
+              totalPrice += goods_list[i].quantity * goods_list[i].price
+            this.totalPrice = totalPrice
+          },
+          deleteGoods(index, id){
+            var config={
+              method: 'delete',
+              url: `/api/delete-merchandise/${id}`,
+              headers: {'Authorization': localStorage.getItem("accessToken")},
+              
+            };
+        
+            alert('remove this item from your cart?')
+            axios(config).then((response=>{
+              this.goods_list.splice(index, 1)
+              this.setTotalPrice()
+            }))
+          }
+        }
     }
 </script>
 
