@@ -165,7 +165,7 @@
             postForm.append("MemberPassword",this.registerPassword);
             var config = {
               method:'post',
-              url:'http://localhost:3000/register',
+              url:'/api/register',
               data:postForm,
               headers:{'Content-Type': 'multipart/form-data'}
             };
