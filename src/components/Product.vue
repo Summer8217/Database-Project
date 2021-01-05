@@ -26,12 +26,8 @@
                 style="width:100px"
                 v-bind:value="this.buyNum"
                 dense
-                append-outer-icon="+"
-                prepend-icon="–"
-                @click:append-outer="addCartNum(index, item.id)"
-                @click:prepend="reduceCartNum(index, item.id)"
             ></v-text-field>
-            <v-btn class="primary white--text" outlined tile dense><v-icon>mdi-cart</v-icon> ADD TO CART</v-btn>
+            <v-btn class="primary white--text" outlined tile dense @click="addShopCart"><v-icon>mdi-cart</v-icon> ADD TO CART</v-btn>
 
           </div>
 
@@ -316,6 +312,7 @@
   </div>
 </template>
 <script>
+    import axios from 'axios'
     export default {
         data: () => ({
             testName: '',
@@ -346,7 +343,17 @@
             ],
         }),
         methods:{
+          addShopCart(){
+            var config={
+              method: 'post',
+              url: '/api/add-to-cart',
+              headers: {'Authorization': localStorage.getItem("accessToken")},
+              data: {merchandise_id: this.$route.query.id , quantity: this.buyNum}
+            };
+            axios(config).then((response=>{
 
+            }))
+          }
         },
         mounted: function(){
           console.log(this.$route.query.id)

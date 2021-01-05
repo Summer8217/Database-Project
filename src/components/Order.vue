@@ -16,7 +16,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
+              <tr v-for="(item,index) in goods_list" :key="index">
                 <td>
                   <v-list-item
                   key="1"
@@ -27,34 +27,14 @@
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title >Item 1</v-list-item-title>
+                    <v-list-item-title >{{item.name}}</v-list-item-title>
                     <v-list-item-subtitle>Lorem Ipsum</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item></td>
-                <td>$40.00</td>
-                <td>2</td>
-                <td>$80.00</td>
-                <td><a>X</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <v-list-item
-                  key="1"
-                  @click=""
-                >
-                  <v-list-item-avatar>
-                    <v-img :src="require('../assets/img/shop/2.jpg')"></v-img>
-                  </v-list-item-avatar>
-
-                  <v-list-item-content>
-                    <v-list-item-title >Item 2</v-list-item-title>
-                    <v-list-item-subtitle>Lorem Ipsum</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item></td>
-                <td>$40.00</td>
-                <td>2</td>
-                <td>$80.00</td>
-                <td><a>X</a></td>
+                <td>${{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>${{item.price * item.quantity}}</td>
+                <td><a @click="deleteGoods(index, item.merchandise_id)">X</a></td>
               </tr>
               <tr>
                 <td>
@@ -69,7 +49,7 @@
                 </v-list-item></td>
                 <td></td>
                 <td></td>
-                <td>$160.00</td>
+                <td>${{this.totalPrice}}</td>
               </tr>
               </tbody>
             </template>
@@ -93,6 +73,9 @@
             <input type="radio" id="ATM" name="paymentType" value="ATM轉帳" v-model="paymentType">
             <label for="ATM">ATM轉帳</label>
         </v-col>
+        <div class="text-center">
+          <v-btn href = "/" class="primary white--text mt-5" outlined>Place Order</v-btn>
+        </div>
       </v-row>
     </v-container>
     <v-card  class="accent" >
@@ -141,8 +124,53 @@
         data() {
         return {
           shipmentType:"宅配到府",
-          paymentType:"信用卡付款"
+          paymentType:"信用卡付款",
+          goods_list:[],
+          totalPrice:0
         };
+        
+      },
+      created(){
+         console.log('created')
+          var config={
+            method: 'get',
+            url: '/api/get-cart',
+            headers: {'Authorization': localStorage.getItem("accessToken")}
+          };
+          axios(config).then((response)=>{
+            console.log('getShopCarts')
+            var totalPrice = 0
+            this.goods_list = response.data
+            this.goods_list.forEach(element => {
+                totalPrice += element.price * element.quantity
+            })
+            this.totalPrice = totalPrice
+            console.log("aaaaaaaaaaaaaaa")
+            console.log(this.totalPrice)
+          });
+      },
+      methods:{
+          setTotalPrice(){
+            var goods_list = this.goods_list
+            var totalPrice = 0
+            for (var i = 0; i < goods_list.length; i++)
+              totalPrice += goods_list[i].quantity * goods_list[i].price
+            this.totalPrice = totalPrice
+          },
+          deleteGoods(index, id){
+            var config={
+              method: 'delete',
+              url: `/api/delete-merchandise/${id}`,
+              headers: {'Authorization': localStorage.getItem("accessToken")},
+              
+            };
+        
+            alert('remove this item from your order?')
+            axios(config).then((response=>{
+              this.goods_list.splice(index, 1)
+              this.setTotalPrice()
+            }))
+          }
       }
     }
 </script>

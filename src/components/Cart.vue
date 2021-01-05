@@ -22,7 +22,7 @@
                 <td>
                   <v-list-item
                   key="1"
-                  @click="a"
+                  @click=""
                 >
                   <v-list-item-avatar>
                     <v-img :src="require('../assets/img/shop/1.jpg')"></v-img>
