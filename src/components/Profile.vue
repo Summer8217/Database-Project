@@ -42,7 +42,6 @@
 <style scoped>
   .ensp:after {
     content: '\2002';
-    speak: none;
   }  
 </style>
 
