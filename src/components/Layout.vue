@@ -37,10 +37,10 @@
         color="primary"
         horizontal
       >
-        <a href="/" class="v-btn">
+        <a href="/" class="v-btn" style="fontSize:14px">
           <span>Home</span>
         </a>
-        <a href="/shop" class="v-btn">
+        <a href="/shop" class="v-btn" style="fontSize:14px">
           <span>Shop</span>
         </a>
       </v-bottom-navigation>
