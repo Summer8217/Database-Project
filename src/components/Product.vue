@@ -178,8 +178,11 @@
               data: {merchandise_id: this.$route.params.id , quantity: this.buyNum}
             };
             axios(config).then((response=>{
-
+              alert("成功加入購物車");
             }))
+            .catch((error) => {
+              alert("請先登入");
+      });
           }
         },
         mounted: function(){
