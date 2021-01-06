@@ -206,7 +206,7 @@
 
               console.log(selectedCoupon)
               if (selectedCoupon.type == "折扣")
-                this.totalPrice *= selectedCoupon.content / 100
+                this.totalPrice *= (selectedCoupon.content / 100)
               else
                 this.totalPrice -= selectedCoupon.content
             }
@@ -225,7 +225,9 @@
             };
             if (this.select != "None")
             {
-              config.data.coupon_code = this.select
+              var lst = this.select.split('-')
+              console.log(lst)
+              config.data.coupon_code = lst[0]
             }
 
             axios(config).then((response)=>{})
