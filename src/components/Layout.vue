@@ -122,6 +122,7 @@
                 items: [
                   { title: 'Profile', link:"/profile" },
                   { title: 'Order', link:"/history_order" },
+                  { title: 'Rotary', link:"/rotary" },
                 ],
                 activeBtn: 1,
                 isLogin: "",
