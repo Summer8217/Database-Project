@@ -6,7 +6,8 @@ E-Commerce website template - Vuetify
 
 https://loving-leavitt-9cb65b.netlify.com/
 
-## Build Setup
+# Team#4 EShop
+## frontend : Build Setup
 
 ``` bash
 # install dependencies
@@ -31,6 +32,11 @@ Download and install DrRacket: https://racket-lang.org/download/
 raco exe webapi.rkt
 
 # or, in DrRacket, open webapi.rkt, click `run`
+
+# db-userinfo.txt
+# the first line is MySQL account
+# the second line is password
+# make sure the MySQL server has been started (port: 3306, schema: eshop) before you run the backend server!
 ```
 
 
