@@ -26,7 +26,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## backend : build and run
 Download and install DrRacket: https://racket-lang.org/download/
-```
+``` bash
 # build a stand-alone executable server and run it.
 raco exe webapi.rkt
 
