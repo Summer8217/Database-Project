@@ -6,7 +6,7 @@ E-Commerce website template - Vuetify
 
 https://loving-leavitt-9cb65b.netlify.com/
 
-# Team#4 EShop
+# Team#4 EShop 家電線上商城
 ## frontend : Build Setup
 
 ``` bash
