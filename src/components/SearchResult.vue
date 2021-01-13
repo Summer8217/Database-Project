@@ -8,10 +8,10 @@
           <v-card outlined>
             <v-card-title class="pb-0">Type</v-card-title>
             <v-container class="pt-0" fluid>
-              <v-checkbox v-model="type" value="Air Purifier" label="Air Purifier" hide-details dense></v-checkbox>
-              <v-checkbox v-model="type" value="Vacuum" label="Vacuum" hide-details dense></v-checkbox>
-              <v-checkbox v-model="type" value="Fan" label="Fan" hide-details dense></v-checkbox>
-              <v-checkbox v-model="type" value="Light" label="Light" hide-details dense></v-checkbox>
+              <v-checkbox v-model="type" value="air purifier" label="Air Purifier" hide-details dense></v-checkbox>
+              <v-checkbox v-model="type" value="vacuum" label="Vacuum" hide-details dense></v-checkbox>
+              <v-checkbox v-model="type" value="fan" label="Fan" hide-details dense></v-checkbox>
+              <v-checkbox v-model="type" value="light" label="Light" hide-details dense></v-checkbox>
             </v-container>
             <v-divider></v-divider>
             <v-card-title>Price</v-card-title>
@@ -133,7 +133,7 @@ import axios from 'axios'
     export default {
         data: () => ({
             kw:'',
-            type: ['Air Purifier', 'Vacuum', 'Fan', 'Light'],
+            type: ['air purifier', 'vacuum', 'fan', 'light'],
             amount: 100,
             show: [1, 12],
             page:1,
@@ -207,7 +207,7 @@ import axios from 'axios'
 
 
             var newProducts = this.products.filter(function(product){
-              return product.price >= low && product.price <= high && (product.type.indexOf(type[0].toLowerCase()) > -1 || product.type.indexOf(type[1].toLowerCase()) > -1 || product.type.indexOf(type[2].toLowerCase()) > -1 || product.type.indexOf(type[3].toLowerCase()) > -1)
+              return product.price >= low && product.price <= high && type.includes(product.type)
             })
 
             this.amount = newProducts.length

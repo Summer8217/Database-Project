@@ -182,7 +182,6 @@ import axios from 'axios'
 
 
             var newProducts = this.products.filter(function(product){
-
               return product.price >= low && product.price <= high && type.includes(product.type)
             })
 
