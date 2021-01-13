@@ -23,3 +23,14 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## backend : build and run
+Download and install DrRacket: https://racket-lang.org/download/
+```
+# build a stand-alone executable server and run it.
+raco exe webapi.rkt
+
+# or, in DrRacket, open webapi.rkt, click `run`
+```
+
+
