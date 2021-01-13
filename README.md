@@ -39,4 +39,7 @@ raco exe webapi.rkt
 # make sure the MySQL server has been started (port: 3306, schema: eshop) before you run the backend server!
 ```
 
+## DB Build
+Open MySQL workbench, import schema from `eshop.sql`, and rename it to `eshop`.
+
 
