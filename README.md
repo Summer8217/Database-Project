@@ -29,7 +29,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 Download and install DrRacket: https://racket-lang.org/download/
 ``` bash
 # build a stand-alone executable server and run it.
-raco exe webapi.rkt
+raco exe --embed-dlls webapi.rkt
 
 # or, in DrRacket, open webapi.rkt, click `run`
 
