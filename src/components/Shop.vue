@@ -182,7 +182,7 @@ import axios from 'axios'
 
 
             var newProducts = this.products.filter(function(product){
-              return product.price >= low && product.price <= high && (product.name.indexOf(type[0]) > -1 || product.name.indexOf(type[1]) > -1 || product.name.indexOf(type[2]) > -1 || product.name.indexOf(type[3]) > -1)
+              return product.price >= low && product.price <= high && (product.type.indexOf(type[0].toLowerCase()) > -1 || product.type.indexOf(type[1].toLowerCase()) > -1 || product.type.indexOf(type[2].toLowerCase()) > -1 || product.type.indexOf(type[3].toLowerCase()) > -1)
             })
 
             this.amount = newProducts.length
