@@ -1,11 +1,3 @@
-# shipit - 0.0.1
-
-E-Commerce website template - Vuetify
-
-## Demo
-
-https://loving-leavitt-9cb65b.netlify.com/
-
 # Team#4 EShop 家電線上商城
 ## frontend : Build Setup
 
